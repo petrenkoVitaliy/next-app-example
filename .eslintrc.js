@@ -29,12 +29,15 @@ module.exports = {
         'plugin:prettier/recommended',
       ],
       rules: {
+        '@typescript-eslint/no-empty-interface': 'off',
         'react/prop-types': 'off',
         'react/react-in-jsx-scope': 'off',
         'jsx-a11y/anchor-is-valid': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+
         '@typescript-eslint/no-unused-vars': ['error'],
         'prettier/prettier': ['error', {}, { usePrettierrc: true }],
-        '@typescript-eslint/explicit-module-boundary-types': 'off',
+
         '@typescript-eslint/explicit-function-return-type': [
           'warn',
           {

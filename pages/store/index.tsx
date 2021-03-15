@@ -2,8 +2,8 @@ import { GetStaticProps } from 'next';
 import { Fragment } from 'react';
 import Link from 'next/link';
 
-import Layout from '../../components/Layout';
-import { Category } from '../../interfaces/category.interface';
+import { SkeletonSchema } from 'schema_containers/SkeletonSchema/SkeletonSchema';
+import { Category } from 'interfaces/category.interface';
 import { API } from '../../utils/apiRequests';
 
 type StaticProps = {
@@ -16,7 +16,7 @@ type Props = {
 
 const StorePage: React.FunctionComponent<Props> = (props) => {
   return (
-    <Layout title="Store">
+    <SkeletonSchema title="Store">
       <h1>Store</h1>
       {props.categories.map(({ id, name }) => (
         <Fragment key={id}>
@@ -24,7 +24,7 @@ const StorePage: React.FunctionComponent<Props> = (props) => {
           <br />
         </Fragment>
       ))}
-    </Layout>
+    </SkeletonSchema>
   );
 };
 

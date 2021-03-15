@@ -1,11 +1,11 @@
-import Layout from '../../../components/Layout';
+import { SkeletonSchema } from 'schema_containers/SkeletonSchema/SkeletonSchema';
 
 const CategoryPage: React.FunctionComponent = () => {
   return (
-    <Layout title="Category">
+    <SkeletonSchema title="Category">
       <h1>Category</h1>
       <p></p>
-    </Layout>
+    </SkeletonSchema>
   );
 };
 

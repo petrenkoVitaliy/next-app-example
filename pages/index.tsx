@@ -1,10 +1,13 @@
-import Layout from '../components/Layout';
+import ContentContainerProvider from 'hocs/ContentContainerProvider';
+import SchemaContainerProvider from 'hocs/SchemaContainerProvider';
 
 const HomePage: React.FunctionComponent = () => (
-  <Layout title="Home">
-    <h1>Home</h1>
-    <p></p>
-  </Layout>
+  <SchemaContainerProvider
+    schema={SchemaContainerProvider.Schemas.SKELETON}
+    containerProps={{ title: 'Home' }}
+  >
+    <ContentContainerProvider schema={ContentContainerProvider.Schemas.BLOG} containerProps={{}} />
+  </SchemaContainerProvider>
 );
 
 export default HomePage;
