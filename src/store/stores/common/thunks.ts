@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getThunkPrefix } from 'utils/store';
+
+import { getThunkPrefix } from '@src/utils/store';
 
 import { actions } from './slice';
 

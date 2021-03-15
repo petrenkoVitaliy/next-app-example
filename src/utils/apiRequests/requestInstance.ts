@@ -1,5 +1,5 @@
 import axios, { Method } from 'axios';
-import { config } from '../../../config';
+import { config } from '@config/index';
 
 const request = axios.create({
   baseURL: config.baseApiUri,

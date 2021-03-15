@@ -1,13 +1,12 @@
 import { GetStaticProps } from 'next';
 import { Fragment, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 
-import { SkeletonSchema } from 'schema_containers/SkeletonSchema/SkeletonSchema';
-import { Category } from 'interfaces/models/category.interface';
-import { API } from 'utils/apiRequests';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { commonStore } from 'store';
+import { SkeletonSchema } from '@src/schema_containers/SkeletonSchema/SkeletonSchema';
+import { Category } from '@src/interfaces/models/category.interface';
+import { API } from '@src/utils/apiRequests';
+import { commonStore } from '@src/store';
 
 type StaticProps = {
   categories: Category[];

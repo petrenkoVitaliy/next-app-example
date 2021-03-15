@@ -1,6 +1,7 @@
 import { Provider } from 'react-redux';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
-import { useStore } from 'store/createStore';
+
+import { useStore } from '@src/store/createStore';
 
 import 'tailwindcss/tailwind.css';
 

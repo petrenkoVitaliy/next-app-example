@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Sequelize } from 'sequelize';
-import { config } from '../../config';
+
+import { ControllerBag } from '@server/interfaces/middleware.interface';
+import { config } from '@config/index';
 
 const getSequelizeConnection = async () => {
   const sequelize = new Sequelize(
@@ -33,12 +35,12 @@ const getSequelizeConnection = async () => {
 };
 
 export const withDatabase = <T>(
-  handler: (db: Sequelize, req: NextApiRequest, res: NextApiResponse<T>) => void,
+  handler: (req: NextApiRequest, res: NextApiResponse<T>, bag: ControllerBag) => void,
 ) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const db = await getSequelizeConnection();
 
-    await handler(db, req, res);
+    await handler(req, res, { db });
 
     db.close().then(() => {
       console.log('--DB close');

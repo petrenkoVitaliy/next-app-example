@@ -1,5 +1,5 @@
 import { ReactNode, useMemo } from 'react';
-import { SkeletonSchema } from 'schema_containers/SkeletonSchema/SkeletonSchema';
+import { SkeletonSchema } from '@src/schema_containers/SkeletonSchema/SkeletonSchema';
 
 enum Schemas {
   SKELETON,

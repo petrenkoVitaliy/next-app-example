@@ -1,5 +1,5 @@
-import ContentContainerProvider from 'hocs/ContentContainerProvider';
-import SchemaContainerProvider from 'hocs/SchemaContainerProvider';
+import ContentContainerProvider from '@src/hocs/ContentContainerProvider';
+import SchemaContainerProvider from '@src/hocs/SchemaContainerProvider';
 
 const HomePage: React.FunctionComponent = () => (
   <SchemaContainerProvider

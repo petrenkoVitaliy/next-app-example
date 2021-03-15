@@ -1,5 +1,5 @@
 import { ReactNode, useMemo } from 'react';
-import BlogContainer from 'content_containers/BlogContainer/BlogContainer';
+import BlogContainer from '@src/content_containers/BlogContainer/BlogContainer';
 
 enum Schemas {
   BLOG,

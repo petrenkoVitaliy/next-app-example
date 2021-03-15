@@ -1,4 +1,4 @@
-import { SkeletonSchema } from 'schema_containers/SkeletonSchema/SkeletonSchema';
+import { SkeletonSchema } from '@src/schema_containers/SkeletonSchema/SkeletonSchema';
 
 const CategoryPage: React.FunctionComponent = () => {
   return (

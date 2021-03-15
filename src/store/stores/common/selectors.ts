@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { CommonReducer, RootReducer } from 'interfaces/store/reducer';
+import { CommonReducer, RootReducer } from '@src/interfaces/store/reducer.interface';
 
 const rootCommonSelector = (state: RootReducer): CommonReducer => state.common;
 

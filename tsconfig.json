@@ -17,10 +17,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@server/*": ["../server/*"],
-      "@config/*": ["../config/*"],
+      "@src/*": ["./src/*"],
+      "@server/*": ["./server/*"],
+      "@config/*": ["./config/*"],
     }
   },
   "include": [
