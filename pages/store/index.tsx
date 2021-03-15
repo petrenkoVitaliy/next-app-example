@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { SkeletonSchema } from 'schema_containers/SkeletonSchema/SkeletonSchema';
 import { Category } from 'interfaces/category.interface';
-import { API } from '../../utils/apiRequests';
+import { API } from 'utils/apiRequests';
 
 type StaticProps = {
   categories: Category[];

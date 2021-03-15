@@ -1,4 +1,4 @@
-import { Category } from '../shared/interfaces/category.interface';
+import { Category } from 'interfaces/category.interface';
 
 export const sampleData: Category[] = [
   { id: 101, name: 'category1' },

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Category } from '../../../shared/interfaces/category.interface';
-import { sampleData } from '../../../utils/sample-data';
+import { Category } from 'interfaces/category.interface';
+import { sampleData } from 'utils/sample-data';
 
 const handler = (_req: NextApiRequest, res: NextApiResponse<Category[]>): void => {
   res.status(200).json(sampleData);
