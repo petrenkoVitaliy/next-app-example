@@ -5,8 +5,6 @@ import NavBar from 'components/NavBar/NavBar';
 import { NavBarList } from 'constants/navbar';
 import Footer from 'components/Footer/Footer';
 
-import 'tailwindcss/tailwind.css';
-
 type Props = {
   children?: ReactNode;
   title: string;

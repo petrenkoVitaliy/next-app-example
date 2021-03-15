@@ -10,6 +10,7 @@
     "prettier": "prettier --write  \"**/*.+(ts|tsx|js|jsx)\""
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.5.0",
     "autoprefixer": "^9.8.6",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
@@ -17,6 +18,11 @@
     "postcss": "^7.0.35",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3"
   },
   "pre-commit": [
@@ -28,6 +34,7 @@
     "@types/classnames": "^2.2.11",
     "@types/node": "^12.12.21",
     "@types/react": "^17.0.1",
+    "@types/react-redux": "^7.1.16",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
     "eslint": "^7.19.0",
