@@ -6,8 +6,8 @@ import { SkeletonSchema } from 'schema_containers/SkeletonSchema/SkeletonSchema'
 import { Category } from 'interfaces/models/category.interface';
 import { API } from 'utils/apiRequests';
 import { useDispatch } from 'react-redux';
-import { Actions, Selectors } from 'store';
 import { useSelector } from 'react-redux';
+import { commonStore } from 'store';
 
 type StaticProps = {
   categories: Category[];
@@ -19,10 +19,11 @@ type Props = {
 
 const StorePage: React.FunctionComponent<Props> = (props) => {
   const dispatch = useDispatch();
-  const message = useSelector(Selectors.CommonSelectors.getMessage());
+
+  const message = useSelector(commonStore.selectors.getMessage());
 
   const handleClick = () => {
-    dispatch(Actions.commonActions.setMessage());
+    dispatch(commonStore.thunks.setMessage());
   };
 
   useEffect(() => {

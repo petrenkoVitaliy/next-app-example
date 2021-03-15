@@ -1,10 +1,10 @@
 import { RootReducer } from 'interfaces/store/reducer';
 import { combineReducers } from 'redux';
 
-import commonReducer from './commonReducer';
+import { reducer as common } from './stores/common';
 
 const rootReducer = combineReducers<RootReducer>({
-  common: commonReducer,
+  common,
 });
 
 export default rootReducer;
