@@ -1,4 +1,4 @@
 TODO:
 
-- init server side (services & controllers layers)
-- init db
+- init server's side middlewares chaining
+- init db structure
