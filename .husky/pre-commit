@@ -1,0 +1,7 @@
+#!/bin/sh
+
+npm run type-check
+npx task format:lint
+npx task format:prettier
+
+# exit 1

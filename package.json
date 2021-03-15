@@ -6,8 +6,8 @@
     "build": "next build",
     "start": "next start",
     "type-check": "tsc",
-    "lint": "eslint \"**/*.{js,ts,tsx}\" --fix",
-    "prettier": "prettier --write  \"**/*.+(ts|tsx|js|jsx)\""
+    "task": "node ./tasks/tasksfile.js",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
@@ -25,11 +25,6 @@
     "reselect": "^4.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3"
   },
-  "pre-commit": [
-    "type-check",
-    "prettier",
-    "lint"
-  ],
   "devDependencies": {
     "@types/classnames": "^2.2.11",
     "@types/node": "^12.12.21",
@@ -37,6 +32,7 @@
     "@types/react-redux": "^7.1.16",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
+    "dedent": "^0.7.0",
     "eslint": "^7.19.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
@@ -44,8 +40,9 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "fork-ts-checker-webpack-plugin": "^6.1.1",
-    "pre-commit": "^1.2.2",
+    "husky": "^5.1.3",
     "prettier": "^2.2.1",
+    "tasksfile": "^5.1.1",
     "typescript": "4.2.3"
   },
   "license": "MIT"
