@@ -27,7 +27,7 @@ const format = {
 };
 
 const db = {
-  migrate() {
+  init() {
     initDatabase();
   },
 };
