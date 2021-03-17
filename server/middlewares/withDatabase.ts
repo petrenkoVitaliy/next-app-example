@@ -4,7 +4,7 @@ import { Sequelize } from 'sequelize';
 import { ControllerBag } from '@server/interfaces/middleware.interface';
 import { config } from '@config/index';
 
-const getSequelizeConnection = async () => {
+const getSequelizeConnection = async (): Promise<Sequelize> => {
   const sequelize = new Sequelize(
     config.database.database,
     config.database.user,
@@ -22,10 +22,11 @@ const getSequelizeConnection = async () => {
   );
 
   // TODO: add node env dev check
+
   await sequelize
     .authenticate({ logging: false })
     .then(() => {
-      console.log('--DB success');
+      console.log('--> DB success connect');
     })
     .catch((err) => {
       console.error('Unable to connect to the database:', err);
@@ -34,18 +35,17 @@ const getSequelizeConnection = async () => {
   return sequelize;
 };
 
-export const withDatabase = <T>(
-  handler: (req: NextApiRequest, res: NextApiResponse<T>, bag: ControllerBag) => void,
+export const withDatabase = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+  bag: ControllerBag,
+  next: (bag: ControllerBag) => Promise<void>,
 ) => {
-  return async (req: NextApiRequest, res: NextApiResponse) => {
-    const db = await getSequelizeConnection();
+  console.log('::withDatabase middleware');
+  const db = await getSequelizeConnection();
 
-    await handler(req, res, { db });
+  await next({ ...bag, db });
 
-    db.close().then(() => {
-      console.log('--DB close');
-    });
-
-    return;
-  };
+  await db.close();
+  console.log('--> DB close');
 };
