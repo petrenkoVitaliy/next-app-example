@@ -1,7 +1,7 @@
-import { Category } from '@src/interfaces/models/category.interface';
+import { CategoryAttributes } from 'models/category';
 import { API_ROUTES } from './constant/apiRoutes';
 import { Request } from './requestInstance';
 
 export const API = {
-  getCategories: async () => Request<Category[]>('GET', API_ROUTES.CATEGORIES),
+  getCategories: async () => Request<CategoryAttributes[]>('GET', API_ROUTES.CATEGORIES),
 };

@@ -4,12 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 
 import { SkeletonSchema } from '@src/schema_containers/SkeletonSchema/SkeletonSchema';
-import { Category } from '@src/interfaces/models/category.interface';
 import { API } from '@src/utils/apiRequests';
 import { commonStore } from '@src/store';
+import { CategoryAttributes } from 'models/category';
 
 type StaticProps = {
-  categories: Category[];
+  categories: CategoryAttributes[];
 };
 
 type Props = {

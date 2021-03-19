@@ -12,7 +12,7 @@ type ControllerWithBag<T = undefined> = (
   bag: ControllerBag,
 ) => Promise<void>;
 
-export type Controller<T = undefined, WithMiddlewares = false> = WithMiddlewares extends true
+export type Controller<T = string, WithMiddlewares = false> = WithMiddlewares extends true
   ? ControllerWithBag<T>
   : ControllerSimple<T>;
 
