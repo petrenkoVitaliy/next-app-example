@@ -1,3 +1,3 @@
 TODO:
 
-- init db schema
+- add FE containers & routes

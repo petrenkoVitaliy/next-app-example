@@ -1,7 +1,8 @@
 const { sh, cli, help } = require('tasksfile');
 const dedent = require('dedent');
 
-const { initDatabase } = require('./scripts/init_database');
+const { initDatabase, dropDatabase } = require('./scripts/database');
+const { createMigration, runMigrations, createSeed, runSeeds } = require('./scripts/sequelize');
 
 /**
  * use in terminal:
@@ -14,6 +15,7 @@ const { initDatabase } = require('./scripts/init_database');
  *
  *  --
  * functions are: (options: {[key: string]: string | boolean | number}, ...arguments: (string | boolean | number)[]) => void
+ *
  * [task_name] can be nested, ex: format:lint
  */
 
@@ -30,9 +32,28 @@ const db = {
   init() {
     initDatabase();
   },
+  drop() {
+    dropDatabase();
+  },
+};
+
+const sequelize = {
+  migration(...args) {
+    createMigration(...args);
+  },
+  seed(...args) {
+    createSeed(...args);
+  },
+  run_migrations() {
+    runMigrations();
+  },
+  run_seeds() {
+    runSeeds();
+  },
 };
 
 cli({
   format,
   db,
+  sequelize,
 });

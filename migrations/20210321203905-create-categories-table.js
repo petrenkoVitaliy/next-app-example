@@ -1,34 +1,41 @@
 'use strict';
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Items', {
+    await queryInterface.createTable('categories', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-
       name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      image_url: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
 
-      CategoryId: {
+      SectionId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Categories',
+          model: 'sections',
           key: 'id',
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
+        allowNull: false,
       },
 
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -37,6 +44,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Items');
+    await queryInterface.dropTable('categories');
   },
 };

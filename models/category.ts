@@ -1,20 +1,31 @@
-import { BuildOptions, DataTypes, Model, Sequelize } from 'sequelize';
+import { DataTypes, Sequelize } from 'sequelize';
+
+import { ItemModel } from './item';
+import { SectionModel } from './section';
+
+import { ModelInstanceType, ModelInstanceStatic } from 'server/interfaces/model.interface';
 
 export interface CategoryAttributes {
   id: number;
   name: string;
+  description: string;
+  image_url: string;
   createdAt: Date;
   updatedAt: Date;
+
+  SectionId: number;
 }
 
-export interface CategoryModel extends Model<CategoryAttributes>, CategoryAttributes {}
-
-export type CategoryStatic = typeof Model & {
-  new (values?: any, options?: BuildOptions): CategoryModel;
-};
+export type CategoryModel = ModelInstanceType<
+  CategoryAttributes,
+  {
+    SectionModel?: SectionModel;
+    ItemModel?: ItemModel;
+  }
+>;
 
 const modelDefiner = (sequelize: Sequelize) => {
-  return <CategoryStatic>sequelize.define(
+  return <ModelInstanceStatic<CategoryModel>>sequelize.define(
     'CategoryModel',
     {
       id: {
@@ -26,17 +37,34 @@ const modelDefiner = (sequelize: Sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      image_url: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+
+      SectionId: {
+        type: DataTypes.NUMBER,
+        references: {
+          model: 'SectionModel',
+          key: 'id',
+        },
+      },
     },
     {
-      tableName: 'Categories',
+      tableName: 'categories',
       timestamps: true,
     },
   );
 };
 
 const modelAssociationsDefiner = (sequelize: Sequelize) => {
-  const { ItemModel, CategoryModel } = sequelize.models;
+  const { SectionModel, CategoryModel, ItemModel } = sequelize.models;
 
+  CategoryModel.belongsTo(SectionModel, { foreignKey: 'SectionId' });
   CategoryModel.hasMany(ItemModel, { foreignKey: 'CategoryId' });
 };
 

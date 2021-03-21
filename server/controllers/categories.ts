@@ -3,6 +3,7 @@ import { getAllCategories } from '@server/services/categories';
 
 import { withDatabase } from '@server/middlewares/withDatabase';
 import { withMiddlewares } from '@server/middlewares';
+// import { Logger } from '@server/utils/logger';
 
 const middlewares = [withDatabase];
 

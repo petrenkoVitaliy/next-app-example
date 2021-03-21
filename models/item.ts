@@ -1,24 +1,30 @@
-import { BuildOptions, DataTypes, Model, Sequelize } from 'sequelize';
+import { DataTypes, Sequelize } from 'sequelize';
+
 import { CategoryModel } from './category';
+
+import { ModelInstanceStatic, ModelInstanceType } from '@server/interfaces/model.interface';
 
 export interface ItemAttributes {
   id: number;
   name: string;
+  description: string;
+  image_url: string;
+  price: number;
   createdAt: Date;
   updatedAt: Date;
-  CategoryId: number | null;
+
+  CategoryId: number;
 }
 
-export interface ItemModel extends Model<ItemAttributes>, ItemAttributes {
-  CategoryModel?: CategoryModel;
-}
-
-export type ItemStatic = typeof Model & {
-  new (values?: any, options?: BuildOptions): ItemModel;
-};
+export type ItemModel = ModelInstanceType<
+  ItemAttributes,
+  {
+    CategoryModel?: CategoryModel;
+  }
+>;
 
 const modelDefiner = (sequelize: Sequelize) => {
-  return <ItemStatic>sequelize.define(
+  return <ModelInstanceStatic<ItemModel>>sequelize.define(
     'ItemModel',
     {
       id: {
@@ -30,6 +36,19 @@ const modelDefiner = (sequelize: Sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      image_url: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      price: {
+        type: DataTypes.NUMBER,
+        allowNull: false,
+      },
+
       CategoryId: {
         type: DataTypes.NUMBER,
         references: {
@@ -39,7 +58,7 @@ const modelDefiner = (sequelize: Sequelize) => {
       },
     },
     {
-      tableName: 'Items',
+      tableName: 'items',
       timestamps: true,
     },
   );
