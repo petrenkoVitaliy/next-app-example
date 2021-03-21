@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { ControllerBag } from '@server/interfaces/middleware.interface';
-import { checkConnection, getSequelizeConnection } from 'models';
+import { checkConnection, getSequelizeConnection } from '@server/db';
+import { Logger } from '@server/utils/logger';
 
 export const withDatabase = async (
   req: NextApiRequest,
@@ -9,13 +10,14 @@ export const withDatabase = async (
   bag: ControllerBag,
   next: (bag: ControllerBag) => Promise<void>,
 ) => {
-  console.log('::withDatabase middleware');
-  const db = getSequelizeConnection();
+  Logger.status('withDatabase middleware');
+  const dbMap = getSequelizeConnection();
 
-  await checkConnection(db);
+  await checkConnection(dbMap.sequelize);
 
-  await next({ ...bag, db });
+  await next({ ...bag, db: dbMap });
 
-  await db.close();
-  console.log('--> DB close');
+  // TODO:
+  // await dbMap.sequelize.close();
+  // Logger.status('--> DB close');
 };

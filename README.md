@@ -1,3 +1,3 @@
 TODO:
 
-- init db structure
+- init db schema

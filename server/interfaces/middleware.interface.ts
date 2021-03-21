@@ -1,5 +1,5 @@
+import { DatabaseMap } from 'models';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Sequelize } from 'sequelize/types';
 
 type ControllerSimple<T = undefined> = (
   req: NextApiRequest,
@@ -26,5 +26,5 @@ export type Middleware = <T = undefined>(
 ) => Promise<void>;
 
 export interface ControllerBag {
-  db: Sequelize | undefined;
+  db: DatabaseMap | undefined;
 }

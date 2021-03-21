@@ -1,43 +1,54 @@
-import { DataTypes, Model } from 'sequelize';
+import { BuildOptions, DataTypes, Model, Sequelize } from 'sequelize';
 import { CategoryModel } from './category';
-import { getSequelizeConnection } from './index';
-
-const sequelize = getSequelizeConnection();
 
 export interface ItemAttributes {
   id: number;
   name: string;
   createdAt: Date;
   updatedAt: Date;
+  CategoryId: number | null;
 }
 
-class ItemModel extends Model implements ItemAttributes {
-  public id!: number;
-  public name!: string;
-
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+export interface ItemModel extends Model<ItemAttributes>, ItemAttributes {
+  CategoryModel?: CategoryModel;
 }
 
-ItemModel.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  },
-  {
-    tableName: 'Items',
-    sequelize: sequelize,
-    timestamps: true,
-  },
-);
+export type ItemStatic = typeof Model & {
+  new (values?: any, options?: BuildOptions): ItemModel;
+};
 
-ItemModel.belongsTo(CategoryModel, { foreignKey: 'CategoryId' });
+const modelDefiner = (sequelize: Sequelize) => {
+  return <ItemStatic>sequelize.define(
+    'ItemModel',
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      CategoryId: {
+        type: DataTypes.NUMBER,
+        references: {
+          model: 'CategoryModel',
+          key: 'id',
+        },
+      },
+    },
+    {
+      tableName: 'Items',
+      timestamps: true,
+    },
+  );
+};
 
-export { ItemModel };
+const modelAssociationsDefiner = (sequelize: Sequelize) => {
+  const { ItemModel, CategoryModel } = sequelize.models;
+
+  ItemModel.belongsTo(CategoryModel, { foreignKey: 'CategoryId' });
+};
+
+export default { modelAssociationsDefiner, modelDefiner };

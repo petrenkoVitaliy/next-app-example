@@ -1,7 +1,4 @@
-import { DataTypes, Model } from 'sequelize';
-import { getSequelizeConnection } from './index';
-
-const sequelize = getSequelizeConnection();
+import { BuildOptions, DataTypes, Model, Sequelize } from 'sequelize';
 
 export interface CategoryAttributes {
   id: number;
@@ -10,33 +7,37 @@ export interface CategoryAttributes {
   updatedAt: Date;
 }
 
-class CategoryModel extends Model implements CategoryAttributes {
-  public id!: number;
-  public name!: string;
+export interface CategoryModel extends Model<CategoryAttributes>, CategoryAttributes {}
 
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+export type CategoryStatic = typeof Model & {
+  new (values?: any, options?: BuildOptions): CategoryModel;
+};
 
-  // public static associations: {};
-}
-
-CategoryModel.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
+const modelDefiner = (sequelize: Sequelize) => {
+  return <CategoryStatic>sequelize.define(
+    'CategoryModel',
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
+    {
+      tableName: 'Categories',
+      timestamps: true,
     },
-  },
-  {
-    tableName: 'Categories',
-    sequelize: sequelize,
-    timestamps: true,
-  },
-);
+  );
+};
 
-export { CategoryModel };
+const modelAssociationsDefiner = (sequelize: Sequelize) => {
+  const { ItemModel, CategoryModel } = sequelize.models;
+
+  CategoryModel.hasMany(ItemModel, { foreignKey: 'CategoryId' });
+};
+
+export default { modelAssociationsDefiner, modelDefiner };

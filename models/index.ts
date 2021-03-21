@@ -1,45 +1,34 @@
-import { Sequelize } from 'sequelize';
+import { Sequelize } from 'sequelize/types';
+import categoryModelDefiner, { CategoryStatic } from './category';
+import itemModelDefiner, { ItemStatic } from './item';
 
-import { config } from '@config/index';
+export interface DatabaseMap {
+  sequelize: Sequelize;
+  CategoryModel: CategoryStatic;
+  ItemModel: ItemStatic;
+}
 
-// let sequelize: Sequelize | undefined = undefined;
-export const getSequelizeConnection = () => {
-  // if (!sequelize) {
-  //   sequelize = generateSequelizeConnection();
-  // }
+export const addModelDefiners = (sequelize: Sequelize): DatabaseMap => {
+  const CategoryModel = categoryModelDefiner.modelDefiner(sequelize);
+  const ItemModel = itemModelDefiner.modelDefiner(sequelize);
 
-  // TODO: Singleton should be rechecked...
+  const sequelizeWithModels = {
+    sequelize,
+    CategoryModel,
+    ItemModel,
+  };
 
-  return generateSequelizeConnection();
+  addModelAssociations(sequelize);
+
+  return sequelizeWithModels;
 };
 
-export const checkConnection = async (sequelize: Sequelize) => {
-  await sequelize
-    .authenticate({ logging: false })
-    .then(() => {
-      console.log('--> DB success connect');
-    })
-    .catch((err) => {
-      console.error('Unable to connect to the database:', err);
-    });
-};
+const associationDefiners = [categoryModelDefiner, itemModelDefiner].map(
+  ({ modelAssociationsDefiner }) => modelAssociationsDefiner,
+);
 
-const generateSequelizeConnection = (): Sequelize => {
-  const sequelize = new Sequelize(
-    config.database.database,
-    config.database.user,
-    config.database.password,
-    {
-      host: config.database.host,
-      dialect: 'mysql',
-      pool: {
-        max: 5, // TODO: not sure here
-        min: 0,
-        acquire: 30000,
-        idle: 10000,
-      },
-    },
-  );
-
-  return sequelize;
+const addModelAssociations = (sequelize: Sequelize) => {
+  for (const associationDefiner of associationDefiners) {
+    associationDefiner(sequelize);
+  }
 };
