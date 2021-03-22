@@ -1,12 +1,18 @@
 import { ReactNode, useMemo } from 'react';
 import BlogContainer from '@src/content_containers/BlogContainer/BlogContainer';
+import SectionsContainer from '@src/content_containers/SectionsContainer/SectionsContainer';
+import CategoryContainer from '@src/content_containers/CategoryContainer/CategoryContainer';
 
 enum Schemas {
   BLOG,
+  SECTIONS,
+  CATEGORY,
 }
 
 const CONTENT_CONTAINER_MAP = {
   [Schemas.BLOG]: BlogContainer,
+  [Schemas.SECTIONS]: SectionsContainer,
+  [Schemas.CATEGORY]: CategoryContainer,
 };
 
 type Prototype = { Schemas: typeof Schemas };

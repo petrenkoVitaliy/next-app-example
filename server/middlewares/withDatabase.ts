@@ -10,7 +10,6 @@ export const withDatabase = async (
   bag: ControllerBag,
   next: (bag: ControllerBag) => Promise<void>,
 ) => {
-  Logger.status('withDatabase middleware');
   const dbMap = getSequelizeConnection();
 
   await checkConnection(dbMap.sequelize);

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CommonReducer } from '@src/interfaces/store/reducer.interface';
+import { CommonReducer } from '@src/interfaces/reducer.interface';
 
 const initialState: CommonReducer = { message: '' };
 

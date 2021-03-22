@@ -35,7 +35,7 @@ module.exports = {
         'jsx-a11y/anchor-is-valid': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
 
-        '@typescript-eslint/no-unused-vars': ['error'],
+        '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: 'Logger' }],
         'prettier/prettier': ['error', {}, { usePrettierrc: true }],
 
         '@typescript-eslint/explicit-function-return-type': 'off',

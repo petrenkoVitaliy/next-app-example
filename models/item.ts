@@ -10,8 +10,8 @@ export interface ItemAttributes {
   description: string;
   image_url: string;
   price: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 
   CategoryId: number;
 }
@@ -19,7 +19,7 @@ export interface ItemAttributes {
 export type ItemModel = ModelInstanceType<
   ItemAttributes,
   {
-    CategoryModel?: CategoryModel;
+    CategoryModel: CategoryModel;
   }
 >;
 

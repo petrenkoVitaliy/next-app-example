@@ -20,9 +20,14 @@ request.interceptors.response.use(
   },
 );
 
-async function Request<M, T = undefined>(method: Method, url: string, data?: T): Promise<M> {
+async function Request<M = unknown, T = undefined>(
+  method: Method,
+  url: string,
+  data: T,
+  validateFunction: (res: any) => M,
+): Promise<M> {
   const res = await request({ method, url, data });
-  return JSON.parse(res.data);
+  return validateFunction(JSON.parse(res.data));
 }
 
 export { Request };

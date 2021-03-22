@@ -10,8 +10,8 @@ export interface CategoryAttributes {
   name: string;
   description: string;
   image_url: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 
   SectionId: number;
 }

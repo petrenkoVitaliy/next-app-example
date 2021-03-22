@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 
 class LoggerModel {
+  routePrefix = chalk.yellowBright(`--> :: ROUTE :: `);
   eventPrefix = chalk.green(`:: EVENT :: `);
   statusPrefix = chalk.yellow(`:: STATUS :: `);
   logPrefix = chalk.magenta(`:: LOG :: `);
@@ -10,11 +11,15 @@ class LoggerModel {
     return require('util').inspect(msg, { colors: true, depth: null });
   }
 
+  route(msg?: string) {
+    console.log(`${this.routePrefix}`, chalk.yellowBright(msg));
+  }
+
   event(msg: string) {
     console.log(`${this.eventPrefix}`, chalk.blue(msg));
   }
 
-  status(msg: string) {
+  status(msg?: string) {
     console.log(`${this.statusPrefix}`, chalk.yellow(msg));
   }
 

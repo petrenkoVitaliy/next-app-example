@@ -13,7 +13,7 @@ export const withMiddlewares = <T = undefined>(hooks: Middleware[]) => (
 
   let nextFn: NextFunction = (bag) => controller(req, res, bag);
 
-  hooks.reverse().forEach((hook) => {
+  [...hooks].reverse().forEach((hook) => {
     const prevNextFn = nextFn;
     nextFn = (bag) => hook(req, res, bag, prevNextFn);
   });

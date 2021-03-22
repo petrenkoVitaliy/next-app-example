@@ -6,8 +6,8 @@ export interface SectionAttributes {
   id: number;
   name: string;
 
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type SectionModel = ModelInstanceType<SectionAttributes>;
