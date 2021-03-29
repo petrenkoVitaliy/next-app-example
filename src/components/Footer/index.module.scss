@@ -1,0 +1,56 @@
+@import '../../styles/variables.scss';
+
+.footer_wrapper {
+  $height: 250px;
+  height: $height;
+
+  .footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: $height;
+
+    padding: $margin-small-1 0;
+    background: $color-primary-2;
+    color: $color-secondary;
+
+    font-size: $font-small-1;
+
+    display: flex;
+    justify-content: space-around;
+
+    h3 {
+      font-size: $font-medium-1;
+    }
+
+    .footer_logo {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer_nav {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+
+      > ul {
+        list-style: lao;
+        > li {
+          margin-bottom: 5px;
+          > a {
+            text-decoration: none;
+            color: $color-secondary;
+          }
+        }
+      }
+    }
+    .footer_contacts {
+      > p {
+        margin: 0 0 5px 0;
+      }
+    }
+  }
+}

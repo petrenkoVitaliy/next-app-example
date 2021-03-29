@@ -3,7 +3,7 @@ import { AppProps } from 'next/dist/next-server/lib/router/router';
 
 import { useStore } from '@src/store/createStore';
 
-import 'tailwindcss/tailwind.css';
+import '@src/styles/reset.scss';
 
 const CustomApp: React.FunctionComponent<AppProps> = ({ Component, pageProps }) => {
   const store = useStore(pageProps.initialReduxState);

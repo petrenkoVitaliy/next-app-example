@@ -1,9 +1,11 @@
 import React, { ReactNode } from 'react';
 import Head from 'next/head';
 
-import NavBar from '@src/components/NavBar/NavBar';
+import { NavBar } from '@src/components/NavBar/NavBar';
 import { NavBarList } from '@src/constants/navbar';
-import Footer from '@src/components/Footer/Footer';
+import { Footer } from '@src/components/Footer/Footer';
+
+import classnames from './index.module.scss';
 
 type Props = {
   children?: ReactNode;
@@ -21,10 +23,10 @@ export const SkeletonSchema: React.FunctionComponent<Props> = (props) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
-      <div className="w-full h-screen bg-green-500 flex flex-col">
+      <div className={classnames.page}>
         <NavBar items={NavBarList} />
-        <div className="w-full bg-yellow-400 flex-grow">{children}</div>
-        <Footer />
+        <div className={classnames.content}>{children}</div>
+        <Footer items={NavBarList} />
       </div>
     </>
   );

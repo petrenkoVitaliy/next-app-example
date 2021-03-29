@@ -1,0 +1,39 @@
+@import '../../styles/variables.scss';
+
+.card {
+  display: flex;
+  flex-direction: column;
+
+  background: $color-secondary;
+  width: 360px;
+  height: 240px;
+  margin: 0 $margin-large-2 $margin-medium-1 0;
+
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0px 1px 4px 0px $color-primary-1;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 1px 20px 0px $color-primary-1;
+  }
+
+  .image_wrapper {
+    width: 360px;
+    height: 200px;
+  }
+
+  .title {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+
+    padding-left: $margin-medium-1;
+
+    > a {
+      font-size: $font-medium-1;
+      text-decoration: none;
+      color: $color-primary;
+    }
+  }
+}

@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { sectionsStore } from '@src/store';
+import classnames from './index.module.scss';
+import { Card } from '@src/components/Card/Card';
 
 interface CategoryContainerProps {}
 
@@ -12,13 +14,11 @@ const CategoryContainer: React.FunctionComponent<CategoryContainerProps> = () =>
   }, [items]);
 
   return (
-    <div>
-      <h1>Items List</h1>
-      <div>
+    <div className={classnames.categories_wrapper}>
+      <h1>Sections List</h1>
+      <div className={classnames.categories}>
         {items.map((item) => (
-          <div key={item.id} className="border-2 border-blue-600 border-solid mb-2">
-            <div>{item.name}</div>
-          </div>
+          <Card key={item.name} name={item.name} image={item.image_url} id={item.name} />
         ))}
       </div>
     </div>

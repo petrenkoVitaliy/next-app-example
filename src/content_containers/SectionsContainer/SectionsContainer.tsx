@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import Link from 'next/link';
+
 import { sectionsStore } from '@src/store';
+import { Card } from '@src/components/Card/Card';
+
+import classnames from './index.module.scss';
 
 interface SectionsContainerProps {}
 
@@ -13,23 +16,26 @@ const SectionsContainer: React.FunctionComponent<SectionsContainerProps> = () =>
   }, [sections]);
 
   return (
-    <div>
+    <section className={classnames.sections}>
       <h1>Sections List</h1>
-      <div>
-        {sections.map((section) => (
-          <div key={section.id} className="border-2 border-blue-600 border-solid mb-2">
-            <div>{section.name}</div>
-            <div>
-              {section.CategoryModels.map((category) => (
-                <div key={category.id} className="px-5">
-                  <Link href={`/store/${category.name}`}>{category.name}</Link>
-                </div>
-              ))}
-            </div>
+
+      {sections.map((section) => (
+        <article key={section.id}>
+          <h3>{section.name}</h3>
+
+          <div className={classnames.categories_wrapper}>
+            {section.CategoryModels.map((category) => (
+              <Card
+                key={category.name}
+                name={category.name}
+                image={category.image_url}
+                id={category.name}
+              />
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+        </article>
+      ))}
+    </section>
   );
 };
 

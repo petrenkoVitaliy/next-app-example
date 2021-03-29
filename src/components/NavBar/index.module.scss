@@ -1,0 +1,51 @@
+@import '../../styles/variables.scss';
+
+.navbar_wrapper {
+  $height: 60px;
+
+  width: 100%;
+  height: $height;
+
+  .navbar {
+    z-index: 1; // TODO
+    position: fixed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: $color-secondary-1;
+    box-shadow: 0px 0px 1px 0px $color-primary;
+    width: 100%;
+    height: $height;
+    margin: 0;
+
+    > li {
+      list-style: none;
+
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+
+      border-bottom: 2px solid transparent;
+
+      &.selected {
+        border-bottom: 2px solid $color-primary;
+      }
+
+      > a {
+        text-decoration: none;
+        color: $color-primary;
+        text-transform: uppercase;
+        font-size: $font-small-1;
+      }
+    }
+
+    .logo {
+      margin-right: 20px;
+      margin-bottom: 5px;
+      font-size: $font-large-2;
+      text-transform: uppercase;
+    }
+  }
+}

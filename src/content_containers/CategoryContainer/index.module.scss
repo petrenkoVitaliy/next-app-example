@@ -1,0 +1,13 @@
+@import '../../styles/variables.scss';
+
+.categories_wrapper {
+  > h1 {
+    text-align: center;
+  }
+
+  .categories {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 $margin-large-1;
+  }
+}

@@ -1,0 +1,20 @@
+@import '../../styles/variables.scss';
+
+.sections {
+  > h1 {
+    text-align: center;
+  }
+
+  > article {
+    > h3 {
+      margin-left: $margin-large-2;
+      text-transform: capitalize;
+    }
+
+    .categories_wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+  }
+}
