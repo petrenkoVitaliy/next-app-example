@@ -1,20 +1,14 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-
-import { ControllerBag } from '@server/interfaces/middleware.interface';
+import { NextFunction } from '@server/interfaces/middleware.interface';
 import { checkConnection, getSequelizeConnection } from '@server/db';
 import { Logger } from '@server/utils/logger';
+import { ControllerBag } from '@server/interfaces/controllerBag.interface';
 
-export const withDatabase = async (
-  req: NextApiRequest,
-  res: NextApiResponse,
-  bag: ControllerBag,
-  next: (bag: ControllerBag) => Promise<void>,
-) => {
+export const withDatabase = async <T>(next: NextFunction<T>, bag: ControllerBag) => {
   const dbMap = getSequelizeConnection();
 
   await checkConnection(dbMap.sequelize);
 
-  await next({ ...bag, db: dbMap });
+  return await next({ ...bag, db: dbMap });
 
   // TODO:
   // await dbMap.sequelize.close();

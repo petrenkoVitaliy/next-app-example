@@ -1,14 +1,16 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest } from 'next';
 
-import { ControllerBag } from '@server/interfaces/middleware.interface';
 import { Logger } from '@server/utils/logger';
+import { ControllerBag } from '@server/interfaces/controllerBag.interface';
+import { NextFunction } from '@server/interfaces/middleware.interface';
 
-export const withRequestLog = async (
-  req: NextApiRequest,
-  res: NextApiResponse,
+export const withRequestLog = async <T>(
+  next: NextFunction<T>,
   bag: ControllerBag,
-  next: (bag: ControllerBag) => Promise<void>,
+  req?: NextApiRequest,
 ) => {
-  Logger.route(req.url);
+  if (req) {
+    Logger.route(req.url);
+  }
   return await next({ ...bag });
 };

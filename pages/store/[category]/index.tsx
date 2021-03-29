@@ -1,7 +1,10 @@
+import { getCategoriesProvider } from '@server/controllers/categories';
+import { getItemsByCategoryProvider } from '@server/controllers/items';
 import ContentContainerProvider from '@src/hocs/ContentContainerProvider';
 import SchemaContainerProvider from '@src/hocs/SchemaContainerProvider';
 import { InitialStoreState } from '@src/interfaces/reducer.interface';
-import { API } from '@src/utils/apiRequests';
+import { validateModel } from '@src/utils/apiRequests/validators';
+import { itemsSchema } from '@src/utils/apiRequests/validators/items.schema';
 import { GetStaticProps } from 'next';
 
 const CategoryPage: React.FunctionComponent = () => {
@@ -22,7 +25,13 @@ type StaticProps = { initialReduxState?: InitialStoreState };
 
 export const getStaticProps: GetStaticProps<StaticProps> = async ({ params }) => {
   try {
-    const items = params && params.category ? await API.getItems(params.category as string) : [];
+    const itemsResponse =
+      params && params.category
+        ? await getItemsByCategoryProvider.getter({ categoryName: params.category as string })
+        : [];
+
+    const items = validateModel(itemsSchema)(itemsResponse);
+
     return { props: { initialReduxState: { sections: { items, sections: [] } } } };
   } catch (err) {
     console.log(err);
@@ -31,7 +40,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ params }) =>
 };
 
 export async function getStaticPaths() {
-  const categories = await API.getCategories();
+  const categories = await getCategoriesProvider.getter(undefined);
 
   const paths = categories.map((category) => ({
     params: { category: category.name },

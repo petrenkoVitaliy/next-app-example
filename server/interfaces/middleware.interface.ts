@@ -1,30 +1,22 @@
-import { DatabaseMap } from 'models';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { ControllerBag } from './controllerBag.interface';
 
-type ControllerSimple<T = undefined> = (
-  req: NextApiRequest,
-  res: NextApiResponse<T>,
-) => Promise<void>;
-
-type ControllerWithBag<T = undefined> = (
+export type Controller<T = undefined> = (
   req: NextApiRequest,
   res: NextApiResponse<T>,
   bag: ControllerBag,
 ) => Promise<void>;
 
-export type Controller<T = string, WithMiddlewares = false> = WithMiddlewares extends true
-  ? ControllerWithBag<T>
-  : ControllerSimple<T>;
+export type GetterController<T = undefined, M = undefined> = (
+  bag: ControllerBag,
+  params: M,
+) => Promise<T>;
 
-export type NextFunction = (bag: ControllerBag) => Promise<void>;
+export type NextFunction<T = void> = (bag: ControllerBag) => Promise<T>;
 
 export type Middleware = <T = undefined>(
-  req: NextApiRequest,
-  res: NextApiResponse<T>,
+  next: NextFunction<T>,
   bag: ControllerBag,
-  next: NextFunction,
-) => Promise<void>;
-
-export interface ControllerBag {
-  db: DatabaseMap | undefined;
-}
+  req?: NextApiRequest,
+  res?: NextApiResponse<T>,
+) => Promise<T>;

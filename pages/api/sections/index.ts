@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getSectionsController } from '@server/controllers/sections';
+import { getSectionsProvider } from '@server/controllers/sections';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-  return getSectionsController(req, res);
+  return getSectionsProvider.controller(req, res);
 };
 
 export default handler;
