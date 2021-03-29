@@ -1,12 +1,12 @@
 import { API_ROUTES } from './constant/apiRoutes';
 import { Request } from './requestInstance';
-import { validateResponse } from './validators';
+import { validateResponse } from '../validators';
 import { CategoryInterface } from '@src/interfaces/categories.interface';
 import { SectionInterface } from '@src/interfaces/sections.interface';
-import { categoriesSchema } from './validators/categories.schema';
-import { sectionsSchema } from './validators/sections.schema';
+import { categoriesSchema } from '../validators/categories.schema';
+import { sectionsSchema } from '../validators/sections.schema';
 import { itemInterface } from '@src/interfaces/items.interface';
-import { itemsSchema } from './validators/items.schema';
+import { itemsSchema } from '../validators/items.schema';
 
 export const API = {
   getCategories: async () =>
