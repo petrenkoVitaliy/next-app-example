@@ -1,5 +1,10 @@
 import { ReactNode, useMemo } from 'react';
-import { SkeletonSchema } from '@src/schema_containers/SkeletonSchema/SkeletonSchema';
+import { SkeletonSchema } from '@src/containers/schema_containers/SkeletonSchema/SkeletonSchema';
+
+/**
+ * after hours of pain, I understood that this pattern requires changes with type checking
+ * containerProps type isn't valid, it can accept extra keys
+ */
 
 enum Schemas {
   SKELETON,
@@ -30,4 +35,4 @@ const SchemaContainerProvider: React.FunctionComponent<SchemaContainerProviderPr
 };
 
 SchemaContainerProvider.Schemas = Schemas;
-export default SchemaContainerProvider;
+export { SchemaContainerProvider };

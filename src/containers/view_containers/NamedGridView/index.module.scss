@@ -1,6 +1,6 @@
-@import '../../styles/variables.scss';
+@import '../../../styles/variables.scss';
 
-.sections {
+.named_grid_wrapper {
   > h1 {
     text-align: center;
   }
@@ -11,7 +11,7 @@
       text-transform: capitalize;
     }
 
-    .categories_wrapper {
+    .cards_wrapper {
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-start;

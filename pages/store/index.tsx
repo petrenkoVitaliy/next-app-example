@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next';
 
-import SchemaContainerProvider from '@src/hocs/SchemaContainerProvider';
-import ContentContainerProvider from '@src/hocs/ContentContainerProvider';
+import { SchemaContainerProvider } from '@src/hocs/SchemaContainerProvider';
 import { InitialStoreState } from '@src/interfaces/reducer.interface';
 import { GETTERS } from '@src/utils/getterRequests';
+import { StoreContainer } from '@src/containers/content_containers/StoreContainer/StoreContainer';
 
 const StorePage: React.FunctionComponent = () => {
   return (
@@ -11,10 +11,7 @@ const StorePage: React.FunctionComponent = () => {
       schema={SchemaContainerProvider.Schemas.SKELETON}
       containerProps={{ title: 'Store' }}
     >
-      <ContentContainerProvider
-        schema={ContentContainerProvider.Schemas.SECTIONS}
-        containerProps={{}}
-      />
+      <StoreContainer />
     </SchemaContainerProvider>
   );
 };

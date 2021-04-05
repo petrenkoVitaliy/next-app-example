@@ -1,5 +1,5 @@
-import ContentContainerProvider from '@src/hocs/ContentContainerProvider';
-import SchemaContainerProvider from '@src/hocs/SchemaContainerProvider';
+import { CategoriesContainer } from '@src/containers/content_containers/CategoriesContainer/CategoriesContainer';
+import { SchemaContainerProvider } from '@src/hocs/SchemaContainerProvider';
 import { InitialStoreState } from '@src/interfaces/reducer.interface';
 import { GETTERS } from '@src/utils/getterRequests';
 import { GetStaticProps } from 'next';
@@ -10,10 +10,7 @@ const CategoryPage: React.FunctionComponent = () => {
       schema={SchemaContainerProvider.Schemas.SKELETON}
       containerProps={{ title: 'Category' }}
     >
-      <ContentContainerProvider
-        schema={ContentContainerProvider.Schemas.CATEGORY}
-        containerProps={{}}
-      />
+      <CategoriesContainer />
     </SchemaContainerProvider>
   );
 };
