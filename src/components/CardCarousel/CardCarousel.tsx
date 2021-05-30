@@ -17,20 +17,22 @@ interface CardProps {
 
 type Prototype = { Sizes: { [key in WindowSizesEnum]: number }; DefaultMargin: number };
 
-const DEFAULT_MARGIN = 5;
+const DEFAULT_MARGIN = 20;
 const Sizes: { [key in WindowSizesEnum]: number } = {
-  [WindowSizesEnum.extra_small]: 360,
-  [WindowSizesEnum.small]: 360,
-  [WindowSizesEnum.medium]: 360,
-  [WindowSizesEnum.large]: 360,
-  [WindowSizesEnum.extra_large]: 460,
+  [WindowSizesEnum.extra_small]: 500,
+  [WindowSizesEnum.small]: 500,
+  [WindowSizesEnum.medium]: 500,
+  [WindowSizesEnum.large]: 500,
+  [WindowSizesEnum.extra_large]: 550,
 };
 
-const Card: React.FunctionComponent<CardProps> & Prototype = (props) => {
-  const { name, image, id, size, description, marginRight } = props;
+const CardCarousel: React.FunctionComponent<CardProps> & Prototype = (props) => {
+  const { name, image, id, size, marginRight } = props;
 
   const router = useRouter();
   const cardWidth = useMemo(() => Sizes[size || WindowSizesEnum.medium] - DEFAULT_MARGIN, [size]);
+  const cardHeight = useMemo(() => cardWidth / 1.5, [cardWidth]);
+  const imageHeight = useMemo(() => cardWidth / 1.8, [cardWidth]);
 
   const handleClick = () => {
     router.push(`/store/${id}`);
@@ -42,24 +44,29 @@ const Card: React.FunctionComponent<CardProps> & Prototype = (props) => {
 
   return (
     <div
-      className={classnames.card}
+      className={classnames.card_carousel}
       onClick={handleClick}
       onKeyPress={handleKeyPress}
       role="button"
       tabIndex={0}
-      style={{ width: cardWidth, marginRight: marginRight || DEFAULT_MARGIN }}
+      style={{
+        width: cardWidth,
+        height: cardHeight,
+        marginRight: marginRight || DEFAULT_MARGIN,
+      }}
     >
-      <div className={classnames.image_wrapper} style={{ width: cardWidth }}>
-        <Image height="200px" width={cardWidth} src={image} />
+      <div className={classnames.image_wrapper} style={{ width: cardWidth, height: imageHeight }}>
+        <Image height={imageHeight} width={cardWidth} src={image} />
       </div>
       <div className={classnames.title}>
         <Link href={`/store/${id}`}>{name}</Link>
+        <div className={classnames.price}>100$</div>
       </div>
-      <div className={classnames.details}>{description}</div>
     </div>
   );
 };
 
-Card.Sizes = Sizes;
-Card.DefaultMargin = DEFAULT_MARGIN;
-export { Card };
+CardCarousel.Sizes = Sizes;
+CardCarousel.DefaultMargin = DEFAULT_MARGIN;
+
+export { CardCarousel };

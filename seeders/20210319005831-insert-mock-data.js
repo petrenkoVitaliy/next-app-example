@@ -44,6 +44,27 @@ const sectionsMap = [
           },
         ],
       },
+      {
+        name: 'category_2',
+        description: 'category_2 description',
+        image_url:
+          'https://media.qcsupply.com/media/catalog/product/cache/5284d6cde28d5b60f464df18bb1a18f4/3/5/350049.jpg',
+        items: [],
+      },
+      {
+        name: 'category_3',
+        description: 'category_3 description',
+        image_url:
+          'https://media.qcsupply.com/media/catalog/product/cache/5284d6cde28d5b60f464df18bb1a18f4/3/5/350049.jpg',
+        items: [],
+      },
+      {
+        name: 'category_4',
+        description: 'category_4 description',
+        image_url:
+          'https://media.qcsupply.com/media/catalog/product/cache/5284d6cde28d5b60f464df18bb1a18f4/3/5/350049.jpg',
+        items: [],
+      },
     ],
   },
   {
@@ -102,6 +123,41 @@ const sectionsMap = [
             price: 900,
           },
         ],
+      },
+      {
+        name: 'category_4',
+        description: 'category_4 description',
+        image_url:
+          'https://media.qcsupply.com/media/catalog/product/cache/5284d6cde28d5b60f464df18bb1a18f4/3/5/350049.jpg',
+        items: [],
+      },
+      {
+        name: 'category_5',
+        description: 'category_5 description',
+        image_url:
+          'https://media.qcsupply.com/media/catalog/product/cache/5284d6cde28d5b60f464df18bb1a18f4/3/5/350049.jpg',
+        items: [],
+      },
+      {
+        name: 'category_6',
+        description: 'category_6 description',
+        image_url:
+          'https://media.qcsupply.com/media/catalog/product/cache/5284d6cde28d5b60f464df18bb1a18f4/3/5/350049.jpg',
+        items: [],
+      },
+      {
+        name: 'category_7',
+        description: 'category_7 description',
+        image_url:
+          'https://media.qcsupply.com/media/catalog/product/cache/5284d6cde28d5b60f464df18bb1a18f4/3/5/350049.jpg',
+        items: [],
+      },
+      {
+        name: 'category_8',
+        description: 'category_8 description',
+        image_url:
+          'https://media.qcsupply.com/media/catalog/product/cache/5284d6cde28d5b60f464df18bb1a18f4/3/5/350049.jpg',
+        items: [],
       },
     ],
   },

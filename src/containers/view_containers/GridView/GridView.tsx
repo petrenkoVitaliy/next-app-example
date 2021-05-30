@@ -1,27 +1,70 @@
+import { CardCarousel } from '@src/components/CardCarousel/CardCarousel';
+import { commonStore } from '@src/store';
+import { shouldBeGrownCheck } from '@src/utils/functions/markup';
+import clsx from 'clsx';
+import { useMemo, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import classnames from './index.module.scss';
-import { Card } from '@src/components/Card/Card';
+
+interface Item {
+  name: string;
+  description: string;
+  image_url: string;
+}
 
 interface GridViewProps {
   title: string;
 
-  items: {
-    name: string;
-    image_url: string;
-  }[];
+  items: Item[];
 }
 
 const GridView: React.FunctionComponent<GridViewProps> = (props) => {
   const { items, title } = props;
 
+  const gridViewContainerRef = useRef<HTMLElement>(null);
+
+  const windowSize = useSelector(commonStore.selectors.getWindowSize());
+
+  const { isFullWrap, marginForCard } = useMemo(() => {
+    const containerWidth = gridViewContainerRef?.current?.clientWidth;
+
+    if (!containerWidth || !windowSize) {
+      return { isFullWrap: false };
+    }
+
+    const cardSize = CardCarousel.Sizes[windowSize.size];
+    const { isFullWrap, marginForCard } = shouldBeGrownCheck(
+      containerWidth,
+      cardSize,
+      items.length,
+      CardCarousel.DefaultMargin,
+    );
+
+    return { isFullWrap, marginForCard };
+  }, [items, gridViewContainerRef, windowSize]);
+
   return (
-    <div className={classnames.grid_wrapper}>
+    <section className={classnames.grid_wrapper}>
       <h1>{title}</h1>
-      <div className={classnames.cards_wrapper}>
+      <article
+        className={clsx(classnames.cards_wrapper, {
+          [classnames.fullWrap]: isFullWrap,
+        })}
+        ref={gridViewContainerRef}
+      >
         {items.map((item) => (
-          <Card key={item.name} name={item.name} image={item.image_url} id={item.name} />
+          <CardCarousel
+            key={item.name}
+            name={item.name}
+            image={item.image_url}
+            id={item.name}
+            size={windowSize?.size || null}
+            description={item.description}
+            marginRight={marginForCard}
+          />
         ))}
-      </div>
-    </div>
+      </article>
+    </section>
   );
 };
 

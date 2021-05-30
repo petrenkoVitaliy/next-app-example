@@ -5,3 +5,6 @@ const rootCommonSelector = (state: RootReducer): CommonReducer => state.common;
 
 export const getMessage = () =>
   createSelector(rootCommonSelector, (commonState) => commonState.message);
+
+export const getWindowSize = () =>
+  createSelector(rootCommonSelector, (commonState) => commonState.windowSize);

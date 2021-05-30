@@ -17,7 +17,7 @@ const SCHEMAS_CONTAINER_MAP = {
 type Prototype = { Schemas: typeof Schemas };
 
 interface SchemaContainerProviderProps<
-  Schema extends keyof typeof SCHEMAS_CONTAINER_MAP = keyof typeof SCHEMAS_CONTAINER_MAP
+  Schema extends keyof typeof SCHEMAS_CONTAINER_MAP = keyof typeof SCHEMAS_CONTAINER_MAP,
 > {
   schema: Schema;
   containerProps: React.ComponentProps<typeof SCHEMAS_CONTAINER_MAP[Schema]>;

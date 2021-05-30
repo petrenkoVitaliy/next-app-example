@@ -6,10 +6,9 @@ import { withHooks, withMiddlewares } from './hooks';
 function generateProvider<
   ResponseType,
   ParamsType = undefined,
-  IncomingParamsType = ParamsType extends undefined ? undefined : ParamsType
+  IncomingParamsType = ParamsType extends undefined ? undefined : ParamsType,
 >(
   service: (bag: FilledControllerBag, params: IncomingParamsType) => Promise<ResponseType>,
-
   middlewares: Middleware[],
   paramsParser: ParamsType extends undefined
     ? undefined

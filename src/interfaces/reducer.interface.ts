@@ -1,8 +1,10 @@
 import { itemInterface } from './items.interface';
 import { SectionInterface } from './sections.interface';
+import { WindowSize } from './windowSize.interface';
 
 export interface CommonReducer {
   message: string;
+  windowSize: WindowSize | null;
 }
 
 export interface SectionsReducer {

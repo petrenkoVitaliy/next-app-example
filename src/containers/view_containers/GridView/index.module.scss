@@ -1,6 +1,8 @@
 @import '../../../styles/variables.scss';
 
 .grid_wrapper {
+  padding: 0 $margin-large-3 $margin-large-3 $margin-large-3;
+
   > h1 {
     text-align: center;
   }
@@ -8,6 +10,13 @@
   .cards_wrapper {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 $margin-large-1;
+
+    &.fullWrap {
+      justify-content: space-between;
+
+      > div {
+        margin-right: 5px;
+      }
+    }
   }
 }

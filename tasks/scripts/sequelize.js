@@ -3,7 +3,11 @@ const { sh } = require('tasksfile');
 require('dotenv').config();
 
 async function runMigrations(options) {
-  sh(`npx sequelize-cli db:migrate`, { nopipe: true });
+  try {
+    sh(`npx sequelize-cli db:migrate`, { nopipe: true });
+  } catch (ex) {
+    console.log(ex);
+  }
 }
 
 async function runSeeds(options) {
