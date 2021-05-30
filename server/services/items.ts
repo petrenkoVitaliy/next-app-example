@@ -12,6 +12,7 @@ export const getItemsByCategoryService = async (
   const sections = category
     ? await db.ItemModel.findAll({
         where: { CategoryId: category.id },
+        include: db.ImageModel,
       })
     : [];
 

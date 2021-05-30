@@ -5,7 +5,7 @@ import { CategoryInterface } from '@src/interfaces/categories.interface';
 import { SectionInterface } from '@src/interfaces/sections.interface';
 import { categoriesSchema } from '../validators/categories.schema';
 import { sectionsSchema } from '../validators/sections.schema';
-import { itemInterface } from '@src/interfaces/items.interface';
+import { ItemInterface } from '@src/interfaces/items.interface';
 import { itemsSchema } from '../validators/items.schema';
 
 export const API = {
@@ -18,7 +18,7 @@ export const API = {
     ),
 
   getItems: async (categoryName: string) =>
-    Request<itemInterface[]>(
+    Request<ItemInterface[]>(
       'GET',
       API_ROUTES.ITEMS(categoryName),
       undefined,

@@ -1,3 +1,4 @@
 import { ItemAttributes } from 'models/item';
+import { ImageInterface } from './images.interface';
 
-export type itemInterface = ItemAttributes;
+export type ItemInterface = ItemAttributes & { ImageModels: ImageInterface[] };

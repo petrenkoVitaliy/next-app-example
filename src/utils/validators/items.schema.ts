@@ -1,7 +1,8 @@
 import { JSONSchemaType } from 'ajv';
-import { itemInterface } from '@src/interfaces/items.interface';
+import { ItemInterface } from '@src/interfaces/items.interface';
+import { imagesSchema } from './images.schema';
 
-export const itemsSchema: JSONSchemaType<itemInterface[]> = {
+export const itemsSchema: JSONSchemaType<ItemInterface[]> = {
   type: 'array',
   items: {
     type: 'object',
@@ -9,15 +10,16 @@ export const itemsSchema: JSONSchemaType<itemInterface[]> = {
       id: { type: 'integer' },
       name: { type: 'string' },
       description: { type: 'string' },
-      image_url: { type: 'string' },
       price: { type: 'integer' },
 
       CategoryId: { type: 'integer' },
 
+      ImageModels: imagesSchema,
+
       createdAt: { type: 'string' },
       updatedAt: { type: 'string' },
     },
-    required: ['id', 'name', 'description', 'image_url', 'CategoryId', 'createdAt', 'updatedAt'],
+    required: ['id', 'name', 'description', 'CategoryId', 'createdAt', 'updatedAt', 'ImageModels'],
     additionalProperties: false,
   },
 };

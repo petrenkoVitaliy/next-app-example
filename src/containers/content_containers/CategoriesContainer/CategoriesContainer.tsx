@@ -11,7 +11,7 @@ const CategoriesContainer: React.FunctionComponent = () => {
     () =>
       storeItems.map((item) => ({
         name: item.name,
-        image_url: item.image_url,
+        image_urls: item.ImageModels.map((image) => image.url),
         description: item.description,
       })),
     [storeItems],

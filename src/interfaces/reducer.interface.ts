@@ -1,4 +1,4 @@
-import { itemInterface } from './items.interface';
+import { ItemInterface } from './items.interface';
 import { SectionInterface } from './sections.interface';
 import { WindowSize } from './windowSize.interface';
 
@@ -9,7 +9,7 @@ export interface CommonReducer {
 
 export interface SectionsReducer {
   sections: SectionInterface[];
-  items: itemInterface[];
+  items: ItemInterface[];
 }
 
 export interface RootReducer {

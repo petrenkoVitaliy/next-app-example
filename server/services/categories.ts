@@ -6,7 +6,7 @@ export const getCategoriesService = async (
 ): Promise<CategoryModel[]> => {
   const { db } = controllerBag;
 
-  const categories = await db.CategoryModel.findAll({});
+  const categories = await db.CategoryModel.findAll({ include: db.ImageModel });
 
   return categories;
 };

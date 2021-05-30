@@ -21,6 +21,6 @@ module.exports = {
     return config;
   },
   images: {
-    domains: ['media.qcsupply.com', 'mobileimages.lowes.com'],
+    domains: ['storage.googleapis.com'],
   },
 };

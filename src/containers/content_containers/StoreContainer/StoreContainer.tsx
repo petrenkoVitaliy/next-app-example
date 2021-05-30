@@ -15,7 +15,7 @@ const StoreContainer: React.FunctionComponent = () => {
         items: section.CategoryModels.map((CategoryModel) => {
           return {
             name: CategoryModel.name,
-            image_url: CategoryModel.image_url,
+            image_urls: CategoryModel.ImageModels.map((image) => image.url),
             description: CategoryModel.description,
           };
         }),

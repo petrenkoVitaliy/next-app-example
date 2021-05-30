@@ -2,22 +2,41 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('categories', {
+    await queryInterface.createTable('images', {
       id: {
-        allowNull: false,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
       },
       name: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
-      description: {
-        type: Sequelize.TEXT,
+      url: {
+        type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
 
+      CategoryId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'categories',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        allowNull: true,
+      },
+      ItemId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'items',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        allowNull: true,
+      },
       SectionId: {
         type: Sequelize.INTEGER,
         references: {
@@ -25,7 +44,7 @@ module.exports = {
           key: 'id',
         },
         onDelete: 'CASCADE',
-        allowNull: false,
+        allowNull: true,
       },
 
       createdAt: {
@@ -40,6 +59,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('categories');
+    await queryInterface.dropTable('images');
   },
 };

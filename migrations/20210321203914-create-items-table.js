@@ -17,10 +17,6 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false,
       },
-      image_url: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       price: {
         type: Sequelize.INTEGER,
         allowNull: false,

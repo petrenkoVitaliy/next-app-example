@@ -9,3 +9,4 @@
 .env.production.local
 
 /config/config.json
+/config/key

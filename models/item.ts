@@ -1,4 +1,4 @@
-import { DataTypes, Sequelize } from 'sequelize';
+import { DataTypes, Model, Sequelize } from 'sequelize';
 
 import { CategoryModel } from './category';
 
@@ -8,7 +8,6 @@ export interface ItemAttributes {
   id: number;
   name: string;
   description: string;
-  image_url: string;
   price: number;
   createdAt: string;
   updatedAt: string;
@@ -24,7 +23,10 @@ export type ItemModel = ModelInstanceType<
 >;
 
 const modelDefiner = (sequelize: Sequelize) => {
-  return <ModelInstanceStatic<ItemModel>>sequelize.define(
+  return <ModelInstanceStatic<ItemModel>>sequelize.define<
+    Model,
+    Omit<ItemAttributes, 'createdAt' | 'updatedAt'>
+  >(
     'ItemModel',
     {
       id: {
@@ -38,10 +40,6 @@ const modelDefiner = (sequelize: Sequelize) => {
       },
       description: {
         type: DataTypes.TEXT,
-        allowNull: false,
-      },
-      image_url: {
-        type: DataTypes.STRING,
         allowNull: false,
       },
       price: {
@@ -65,9 +63,10 @@ const modelDefiner = (sequelize: Sequelize) => {
 };
 
 const modelAssociationsDefiner = (sequelize: Sequelize) => {
-  const { ItemModel, CategoryModel } = sequelize.models;
+  const { ItemModel, CategoryModel, ImageModel } = sequelize.models;
 
   ItemModel.belongsTo(CategoryModel, { foreignKey: 'CategoryId' });
+  ItemModel.hasMany(ImageModel, { foreignKey: 'ItemId' });
 };
 
 export default { modelAssociationsDefiner, modelDefiner };

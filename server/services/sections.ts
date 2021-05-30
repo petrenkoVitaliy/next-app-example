@@ -7,7 +7,13 @@ export const getSectionsService = async (
   const { db } = controllerBag;
 
   const sections = await db.SectionModel.findAll({
-    include: db.CategoryModel,
+    include: [
+      {
+        model: db.CategoryModel,
+        include: [db.ImageModel],
+      },
+      db.ImageModel,
+    ],
   });
 
   return sections;

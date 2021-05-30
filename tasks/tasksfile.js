@@ -2,6 +2,7 @@ const { sh, cli, help } = require('tasksfile');
 const dedent = require('dedent');
 
 const { initDatabase, dropDatabase } = require('./scripts/database');
+const { uploadFile } = require('./scripts/cloud');
 const { createMigration, runMigrations, createSeed, runSeeds } = require('./scripts/sequelize');
 
 /**
@@ -52,8 +53,15 @@ const sequelize = {
   },
 };
 
+const cloud = {
+  upload_file(...args) {
+    uploadFile(...args);
+  },
+};
+
 cli({
   format,
   db,
   sequelize,
+  cloud,
 });

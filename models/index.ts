@@ -3,11 +3,13 @@ import { Sequelize } from 'sequelize/types';
 import categoryModelDefiner, { CategoryModel } from './category';
 import itemModelDefiner, { ItemModel } from './item';
 import sectionModelDefiner, { SectionModel } from './section';
+import imageModelDefiner, { ImageModel } from './image';
 
 interface ModelsMap {
   CategoryModel: ModelInstanceStatic<CategoryModel>;
   ItemModel: ModelInstanceStatic<ItemModel>;
   SectionModel: ModelInstanceStatic<SectionModel>;
+  ImageModel: ModelInstanceStatic<ImageModel>;
 }
 
 type SequelizeWithModels = Sequelize & { models: ModelsMap };
@@ -24,6 +26,7 @@ export const addModelDefiners = (sequelize: Sequelize): DatabaseMap => {
   const CategoryModel = categoryModelDefiner.modelDefiner(sequelize);
   const ItemModel = itemModelDefiner.modelDefiner(sequelize);
   const SectionModel = sectionModelDefiner.modelDefiner(sequelize);
+  const ImageModel = imageModelDefiner.modelDefiner(sequelize);
 
   const sequelizeWithModels = sequelize as SequelizeWithModels;
   const sequelizeModelsMap = {
@@ -31,6 +34,7 @@ export const addModelDefiners = (sequelize: Sequelize): DatabaseMap => {
     CategoryModel,
     ItemModel,
     SectionModel,
+    ImageModel,
   };
 
   addModelAssociations(sequelize);
