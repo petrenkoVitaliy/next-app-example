@@ -1,4 +1,5 @@
 import { SchemaContainerProvider } from '@src/hocs/SchemaContainerProvider';
+import { ItemContainer } from '@src/containers/content_containers/ItemContainer/ItemContainer';
 import { InitialStoreState } from '@src/interfaces/reducer.interface';
 import { GETTERS } from '@src/utils/getterRequests';
 import { GetStaticProps } from 'next';
@@ -9,7 +10,7 @@ const ItemPage: React.FunctionComponent = () => {
       schema={SchemaContainerProvider.Schemas.SKELETON}
       containerProps={{ title: 'Category' }}
     >
-      <div>item</div>
+      <ItemContainer />
     </SchemaContainerProvider>
   );
 };

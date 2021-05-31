@@ -8,3 +8,5 @@ export const getSections = () =>
 
 export const getItems = () =>
   createSelector(rootCommonSelector, (commonState) => commonState.items);
+
+export const getItem = () => createSelector(rootCommonSelector, (commonState) => commonState.item);

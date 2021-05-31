@@ -1,0 +1,25 @@
+@import '../../../styles/variables.scss';
+
+.item_wrapper {
+  padding: $margin-large-3 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .item_body {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+
+    .image_wrapper {
+    }
+    .description_block {
+      .name {
+      }
+      .price {
+      }
+      .description {
+      }
+    }
+  }
+}
