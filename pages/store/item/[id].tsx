@@ -1,16 +1,15 @@
-import { CategoriesContainer } from '@src/containers/content_containers/CategoriesContainer/CategoriesContainer';
 import { SchemaContainerProvider } from '@src/hocs/SchemaContainerProvider';
 import { InitialStoreState } from '@src/interfaces/reducer.interface';
 import { GETTERS } from '@src/utils/getterRequests';
 import { GetStaticProps } from 'next';
 
-const CategoryPage: React.FunctionComponent = () => {
+const ItemPage: React.FunctionComponent = () => {
   return (
     <SchemaContainerProvider
       schema={SchemaContainerProvider.Schemas.SKELETON}
       containerProps={{ title: 'Category' }}
     >
-      <CategoriesContainer />
+      <div>item</div>
     </SchemaContainerProvider>
   );
 };
@@ -19,10 +18,11 @@ type StaticProps = { initialReduxState?: InitialStoreState };
 
 export const getStaticProps: GetStaticProps<StaticProps> = async ({ params }) => {
   try {
-    const items =
-      params && params.category ? await GETTERS.getItems(params.category as string) : [];
+    const item = params && params.id ? await GETTERS.getItem(Number(params.id)) : null;
 
-    return { props: { initialReduxState: { sections: { items, sections: [], item: null } } } };
+    return {
+      props: { initialReduxState: { sections: { items: [], sections: [], item } } },
+    };
   } catch (err) {
     console.log(err);
     return { props: {} };
@@ -30,10 +30,10 @@ export const getStaticProps: GetStaticProps<StaticProps> = async ({ params }) =>
 };
 
 export async function getStaticPaths() {
-  const categories = await GETTERS.getCategories();
+  const items = await GETTERS.getAllItems();
 
-  const paths = categories.map((category) => ({
-    params: { category: category.name },
+  const paths = items.map((item) => ({
+    params: { id: String(item.id) },
   }));
 
   return {
@@ -42,4 +42,4 @@ export async function getStaticPaths() {
   };
 }
 
-export default CategoryPage;
+export default ItemPage;

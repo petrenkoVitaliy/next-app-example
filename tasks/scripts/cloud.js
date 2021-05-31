@@ -7,6 +7,7 @@ async function uploadFile(options) {
   try {
     const bucketName = process.env.BUCKET_NAME;
     const filePath = options.file;
+    const folder = options.folder || 'common';
 
     if (!bucketName) {
       console.log('Add BUCKET_NAME to env');
@@ -21,7 +22,7 @@ async function uploadFile(options) {
     const storage = new Storage();
     const bucket = storage.bucket(bucketName);
 
-    const res = await bucket.upload(`./${filePath}`, { destination: `common/${filePath}` });
+    const res = await bucket.upload(`./${filePath}`, { destination: `${folder}/${filePath}` });
     console.log(res);
     console.log('Success');
   } catch (ex) {

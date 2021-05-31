@@ -11,7 +11,11 @@ async function runMigrations(options) {
 }
 
 async function runSeeds(options) {
-  sh(`npx sequelize-cli db:seed:all`, { nopipe: true });
+  try {
+    sh(`npx sequelize-cli db:seed:all`, { nopipe: true });
+  } catch (ex) {
+    console.log(ex);
+  }
 }
 
 async function createMigration(options) {

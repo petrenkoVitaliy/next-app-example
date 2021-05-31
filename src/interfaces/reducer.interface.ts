@@ -10,6 +10,7 @@ export interface CommonReducer {
 export interface SectionsReducer {
   sections: SectionInterface[];
   items: ItemInterface[];
+  item: ItemInterface | null;
 }
 
 export interface RootReducer {

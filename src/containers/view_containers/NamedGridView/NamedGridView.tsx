@@ -7,7 +7,6 @@ import { commonStore } from '@src/store';
 
 import classnames from './index.module.scss';
 import { shouldBeGrownCheck } from '@src/utils/functions/markup';
-import { COMMON_IMAGES } from '@src/constants/defaults';
 
 interface Category {
   id: number;
@@ -79,8 +78,8 @@ const NamedGridView: React.FunctionComponent<NamedGridViewProps> = (props) => {
                 key={item.name}
                 name={item.name}
                 description={item.description}
-                image={item.image_urls[0] || COMMON_IMAGES.NO_DATA}
-                id={item.name}
+                images={item.image_urls}
+                redirectUrl={`/store/${item.name}`}
                 size={windowSize?.size || null}
                 marginRight={category.marginForCard}
               />

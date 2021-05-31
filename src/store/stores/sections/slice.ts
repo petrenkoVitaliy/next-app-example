@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SectionsReducer } from '@src/interfaces/reducer.interface';
 
-const initialState: SectionsReducer = { sections: [], items: [] };
+const initialState: SectionsReducer = { sections: [], items: [], item: null };
 
 const sectionsSlice = createSlice({
   name: 'sections',

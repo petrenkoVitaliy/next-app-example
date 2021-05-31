@@ -11,6 +11,26 @@ const images = [
     name: 'dril2',
     url: 'https://storage.googleapis.com/next-storage-images/items/dril2.png',
   },
+  {
+    id: 3,
+    name: 'dril3',
+    url: 'https://storage.googleapis.com/next-storage-images/items/dril3.jpg',
+  },
+  {
+    id: 4,
+    name: 'dril4',
+    url: 'https://storage.googleapis.com/next-storage-images/items/dril4.jpeg',
+  },
+  {
+    id: 5,
+    name: 'dril5',
+    url: 'https://storage.googleapis.com/next-storage-images/items/dril5.png',
+  },
+  {
+    id: 6,
+    name: 'dril6',
+    url: 'https://storage.googleapis.com/next-storage-images/items/dril6.jpg',
+  },
 ];
 
 const sectionsMap = [
@@ -21,13 +41,14 @@ const sectionsMap = [
       {
         name: 'category_1',
         description: 'category_1 description',
-        imageId: 2,
+        imageIds: [2, 3, 4],
 
         items: [
           {
             name: 'item_1',
             description: 'item_1 description',
             price: 100,
+            imageIds: [1, 5, 6],
           },
           {
             name: 'item_2',
@@ -52,6 +73,7 @@ const sectionsMap = [
         ],
       },
       {
+        imageIds: [3, 4],
         name: 'category_2',
         description: 'category_2 description',
         items: [],
@@ -142,23 +164,44 @@ const sectionsMap = [
   },
 ];
 
-const saveImage = (queryInterface, { CategoryId = null, ItemId = null, SectionId = null }, id) => {
-  const image = images.find((image) => image.id === id);
-  return image
-    ? queryInterface.bulkInsert('images', [
-        {
-          name: image.name,
-          url: image.url,
+const saveImage = async (
+  queryInterface,
+  { CategoryId = null, ItemId = null, SectionId = null },
+  ids = [],
+) => {
+  const foundImages = images.filter((image) => ids.includes(image.id));
 
-          CategoryId,
-          ItemId,
-          SectionId,
+  // const [existingImages] =
+  //   (await queryInterface.sequelize.query(
+  //     `SELECT * FROM images WHERE url IN (${foundImages.map(({ url }) => `'${url}'`).join(', ')})`,
+  //   )) || [];
 
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      ])
-    : null;
+  // const imagesToCreate = foundImages.filter(
+  //   (img) => !existingImages.some(({ url }) => img.url === url),
+  // );
+
+  // const imagesToUpdate = existingImages.filter((img) =>
+  //   foundImages.some(({ url }) => img.url === url),
+  // );
+
+  return Promise.all([
+    foundImages.length
+      ? queryInterface.bulkInsert(
+          'images',
+          foundImages.map((image) => ({
+            name: image.name,
+            url: image.url,
+
+            CategoryId,
+            ItemId,
+            SectionId,
+
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          })),
+        )
+      : null,
+  ]);
 };
 
 module.exports = {
@@ -185,8 +228,8 @@ module.exports = {
         ['id'],
       );
 
-      if (section.imageId) {
-        await saveImage(queryInterface, { SectionId: savedSectionId }, section.imageId);
+      if (section.imageIds) {
+        await saveImage(queryInterface, { SectionId: savedSectionId }, section.imageIds);
       }
 
       for (let category of section.categories) {
@@ -210,8 +253,8 @@ module.exports = {
           ['id'],
         );
 
-        if (category.imageId) {
-          await saveImage(queryInterface, { CategoryId: savedCategoryId }, category.imageId);
+        if (category.imageIds) {
+          await saveImage(queryInterface, { CategoryId: savedCategoryId }, category.imageIds);
         }
 
         for (let item of category.items) {
@@ -226,6 +269,20 @@ module.exports = {
               CategoryId: savedCategoryId,
             },
           ]);
+
+          const savedItemId = await queryInterface.rawSelect(
+            'items',
+            {
+              where: {
+                name: item.name,
+              },
+            },
+            ['id'],
+          );
+
+          if (item.imageIds) {
+            await saveImage(queryInterface, { ItemId: savedItemId }, item.imageIds);
+          }
         }
       }
     }

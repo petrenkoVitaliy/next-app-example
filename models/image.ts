@@ -43,12 +43,10 @@ const modelDefiner = (sequelize: Sequelize) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
       url: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
 
       CategoryId: {

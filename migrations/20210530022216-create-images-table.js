@@ -11,12 +11,10 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
       url: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
 
       CategoryId: {

@@ -1,12 +1,15 @@
 @import '../../styles/variables.scss';
 
+$arrow_button_size: 60px;
+
 .card_carousel {
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   background: $color-secondary;
   height: 240px;
-  margin-bottom: $margin-large-2;
+  margin-bottom: $margin-large-3;
 
   border-radius: $border-radius;
   box-shadow: 0px 1px 4px 0px $color-primary-1;
@@ -16,6 +19,54 @@
   &:hover {
     cursor: pointer;
     box-shadow: 0px 1px 20px 0px $color-primary-1;
+
+    .right_arrow,
+    .left_arrow {
+      opacity: 1;
+    }
+
+    .right_arrow {
+      left: calc(100% - #{$arrow_button_size / 2});
+    }
+    .left_arrow {
+      left: -$arrow_button_size / 2;
+    }
+
+    .details {
+      opacity: 1;
+      height: 60px;
+    }
+  }
+
+  .right_arrow,
+  .left_arrow {
+    opacity: 0;
+
+    width: $arrow_button_size;
+    height: $arrow_button_size;
+
+    box-shadow: 0px 1px 4px 0px $color-primary-1;
+    border-radius: 100%;
+
+    position: absolute;
+    top: calc(50% - #{$arrow_button_size / 2});
+
+    background: $color-secondary;
+    background-size: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    transition: all 0.1s ease-in-out;
+  }
+
+  .right_arrow {
+    left: calc(100% - #{$arrow_button_size});
+    background-image: url('/assets/icons/arrow_right.svg');
+  }
+
+  .left_arrow {
+    left: 0;
+    background-image: url('/assets/icons/arrow_left.svg');
   }
 
   .image_wrapper {
@@ -26,6 +77,7 @@
 
   .title {
     flex-grow: 1;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -43,5 +95,22 @@
       text-decoration: none;
       color: $color-primary;
     }
+  }
+
+  .details {
+    position: absolute;
+
+    opacity: 0;
+    top: 100%;
+    width: 90%;
+    height: 0px;
+    padding: $margin-small-1 $margin-large-2;
+    z-index: 1;
+    border-radius: 0 0 $border-radius $border-radius;
+
+    background: $color-primary-3;
+    color: $color-primary;
+
+    transition: all 0.1s ease-in-out;
   }
 }

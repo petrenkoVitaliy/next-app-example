@@ -10,6 +10,7 @@ const CategoriesContainer: React.FunctionComponent = () => {
   const items = useMemo(
     () =>
       storeItems.map((item) => ({
+        id: item.id,
         name: item.name,
         image_urls: item.ImageModels.map((image) => image.url),
         description: item.description,

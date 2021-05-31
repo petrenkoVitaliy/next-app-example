@@ -1,5 +1,4 @@
 import { CardCarousel } from '@src/components/CardCarousel/CardCarousel';
-import { COMMON_IMAGES } from '@src/constants/defaults';
 import { commonStore } from '@src/store';
 import { shouldBeGrownCheck } from '@src/utils/functions/markup';
 import clsx from 'clsx';
@@ -8,6 +7,7 @@ import { useSelector } from 'react-redux';
 import classnames from './index.module.scss';
 
 interface Item {
+  id: number;
   name: string;
   description: string;
   image_urls: string[];
@@ -57,8 +57,8 @@ const GridView: React.FunctionComponent<GridViewProps> = (props) => {
           <CardCarousel
             key={item.name}
             name={item.name}
-            image={item.image_urls[0] || COMMON_IMAGES.NO_DATA}
-            id={item.name}
+            images={item.image_urls}
+            redirectUrl={`/store/item/${item.id}`}
             size={windowSize?.size || null}
             description={item.description}
             marginRight={marginForCard}
