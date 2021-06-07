@@ -1,0 +1,80 @@
+@import '../../styles/variables.scss';
+
+$position-shift: 60px;
+$image-position-shift: 100px;
+$arrow_button_size: 60px;
+
+.image_preview_wrapper {
+  z-index: map-get($z-indexes, large-1);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  top: $position-shift / 2;
+  left: $position-shift / 2;
+
+  width: calc(100% - #{$position-shift});
+  height: calc(100vh - #{$position-shift});
+
+  background: $color-primary-4;
+
+  .image_container {
+    width: calc(100% - #{$image-position-shift});
+    height: calc(100% - #{$image-position-shift});
+    position: relative;
+  }
+
+  .close_btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+    cursor: pointer;
+
+    background-image: url('/assets/icons/cross.svg');
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &:hover {
+      background-color: $color-primary-3;
+    }
+  }
+
+  .right_arrow,
+  .left_arrow {
+    position: absolute;
+
+    width: $arrow_button_size;
+    height: $arrow_button_size;
+    top: calc(50% - #{$arrow_button_size / 2});
+
+    box-shadow: 0px 1px 4px 0px $color-primary-1;
+    border-radius: 100%;
+
+    background: $color-secondary;
+    background-size: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0px 2px 15px 0px $color-primary-1;
+    }
+  }
+
+  .right_arrow {
+    left: calc(100% - #{$arrow_button_size / 2} - 10px);
+    background-image: url('/assets/icons/arrow_right.svg');
+  }
+
+  .left_arrow {
+    left: -$arrow_button_size / 2 + 10px;
+    background-image: url('/assets/icons/arrow_left.svg');
+  }
+}

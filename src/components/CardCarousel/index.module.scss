@@ -105,7 +105,7 @@ $arrow_button_size: 60px;
     width: 90%;
     height: 0px;
     padding: $margin-small-1 $margin-large-2;
-    z-index: 1;
+    z-index: map-get($z-indexes, small-1);
     border-radius: 0 0 $border-radius $border-radius;
 
     background: $color-primary-3;

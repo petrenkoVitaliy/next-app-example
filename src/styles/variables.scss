@@ -7,6 +7,7 @@ $color-primary: black;
 $color-primary-1: rgb(0, 0, 0, 0.3);
 $color-primary-2: #171717;
 $color-primary-3: #dad7d7;
+$color-primary-4: #ececec;
 $color-secondary: white;
 $color-secondary-1: rgba(255, 255, 255, 0.8);
 
@@ -17,3 +18,12 @@ $margin-large-2: 25px;
 $margin-large-3: 100px;
 
 $border-radius: 10px;
+
+$z-indexes: (
+  small-1: 1,
+  small-2: 2,
+  medium-1: 10,
+  medium-2: 11,
+  large-1: 100,
+  large-2: 101,
+);

@@ -1,0 +1,15 @@
+@import '../../styles/variables.scss';
+
+.button {
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  &.medium {
+    background: $color-primary-3;
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 3px 0px $color-primary;
+  }
+}
