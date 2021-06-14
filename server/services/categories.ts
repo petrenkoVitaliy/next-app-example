@@ -7,7 +7,14 @@ export const getCategoriesService = async (
   const { db } = controllerBag;
 
   const categories = await db.CategoryModel.findAll({
-    include: db.ImageModel,
+    include: [
+      {
+        model: db.ImageModel,
+        through: {
+          attributes: [],
+        },
+      },
+    ],
     order: [['id', 'ASC']],
   });
 

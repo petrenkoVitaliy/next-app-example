@@ -11,7 +11,14 @@ export const getItem = async (
     where: {
       id: params.id,
     },
-    include: db.ImageModel,
+    include: [
+      {
+        model: db.ImageModel,
+        through: {
+          attributes: [],
+        },
+      },
+    ],
   });
 
   return item;
@@ -28,7 +35,14 @@ export const getItemsByCategoryService = async (
   const items = category
     ? await db.ItemModel.findAll({
         where: { CategoryId: category.id },
-        include: db.ImageModel,
+        include: [
+          {
+            model: db.ImageModel,
+            through: {
+              attributes: [],
+            },
+          },
+        ],
       })
     : [];
 

@@ -4,6 +4,7 @@ import { ItemModel } from './item';
 import { SectionModel } from './section';
 
 import { ModelInstanceType, ModelInstanceStatic } from 'server/interfaces/model.interface';
+import { ImageType } from '@server/constants/image';
 
 export interface CategoryAttributes {
   id: number;
@@ -60,11 +61,24 @@ const modelDefiner = (sequelize: Sequelize) => {
 };
 
 const modelAssociationsDefiner = (sequelize: Sequelize) => {
-  const { SectionModel, CategoryModel, ItemModel, ImageModel } = sequelize.models;
+  const { SectionModel, CategoryModel, ItemModel, ImageGatewayModel, ImageModel } =
+    sequelize.models;
 
   CategoryModel.belongsTo(SectionModel, { foreignKey: 'SectionId' });
   CategoryModel.hasMany(ItemModel, { foreignKey: 'CategoryId' });
-  CategoryModel.hasMany(ImageModel, { foreignKey: 'CategoryId' });
+  CategoryModel.belongsToMany(ImageModel, {
+    through: {
+      model: ImageGatewayModel,
+      unique: false,
+      scope: {
+        image_type: ImageType.category,
+      },
+    },
+    targetKey: 'ImageGatewayId',
+    foreignKey: 'reference_id',
+    otherKey: 'id',
+    constraints: false,
+  });
 };
 
 export default { modelAssociationsDefiner, modelDefiner };

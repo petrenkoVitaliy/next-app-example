@@ -11,9 +11,7 @@ export interface ImageAttributes {
   name: string;
   url: string;
 
-  CategoryId?: number;
-  ItemId?: number;
-  SectionId?: number;
+  ImageGatewayId: number;
 
   createdAt: string;
   updatedAt: string;
@@ -49,26 +47,13 @@ const modelDefiner = (sequelize: Sequelize) => {
         allowNull: false,
       },
 
-      CategoryId: {
+      ImageGatewayId: {
         type: DataTypes.NUMBER,
         references: {
-          model: 'CategoryModel',
+          model: 'ImageGatewayModel',
           key: 'id',
         },
-      },
-      ItemId: {
-        type: DataTypes.NUMBER,
-        references: {
-          model: 'ItemModel',
-          key: 'id',
-        },
-      },
-      SectionId: {
-        type: DataTypes.NUMBER,
-        references: {
-          model: 'SectionModel',
-          key: 'id',
-        },
+        allowNull: false,
       },
     },
     {
@@ -79,11 +64,9 @@ const modelDefiner = (sequelize: Sequelize) => {
 };
 
 const modelAssociationsDefiner = (sequelize: Sequelize) => {
-  const { ItemModel, CategoryModel, ImageModel, SectionModel } = sequelize.models;
+  const { ImageModel, ImageGatewayModel } = sequelize.models;
 
-  ImageModel.belongsTo(CategoryModel, { foreignKey: 'CategoryId' });
-  ImageModel.belongsTo(ItemModel, { foreignKey: 'ItemId' });
-  ImageModel.belongsTo(SectionModel, { foreignKey: 'SectionId' });
+  ImageModel.belongsTo(ImageGatewayModel, { foreignKey: 'ImageGatewayId' });
 };
 
 export default { modelAssociationsDefiner, modelDefiner };

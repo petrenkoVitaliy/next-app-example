@@ -3,12 +3,14 @@ import { Sequelize } from 'sequelize/types';
 import categoryModelDefiner, { CategoryModel } from './category';
 import itemModelDefiner, { ItemModel } from './item';
 import sectionModelDefiner, { SectionModel } from './section';
-import imageModelDefiner, { ImageModel } from './image';
+import imageGatewayModelDefiner, { ImageGatewayModel } from './image_gateway';
+import ImageModelDefiner, { ImageModel } from './image';
 
 interface ModelsMap {
   CategoryModel: ModelInstanceStatic<CategoryModel>;
   ItemModel: ModelInstanceStatic<ItemModel>;
   SectionModel: ModelInstanceStatic<SectionModel>;
+  ImageGatewayModel: ModelInstanceStatic<ImageGatewayModel>;
   ImageModel: ModelInstanceStatic<ImageModel>;
 }
 
@@ -18,15 +20,20 @@ export interface DatabaseMap extends ModelsMap {
   sequelize: SequelizeWithModels;
 }
 
-const associationDefiners = [categoryModelDefiner, itemModelDefiner, sectionModelDefiner].map(
-  ({ modelAssociationsDefiner }) => modelAssociationsDefiner,
-);
+const associationDefiners = [
+  categoryModelDefiner,
+  itemModelDefiner,
+  sectionModelDefiner,
+  imageGatewayModelDefiner,
+  ImageModelDefiner,
+].map(({ modelAssociationsDefiner }) => modelAssociationsDefiner);
 
 export const addModelDefiners = (sequelize: Sequelize): DatabaseMap => {
   const CategoryModel = categoryModelDefiner.modelDefiner(sequelize);
   const ItemModel = itemModelDefiner.modelDefiner(sequelize);
   const SectionModel = sectionModelDefiner.modelDefiner(sequelize);
-  const ImageModel = imageModelDefiner.modelDefiner(sequelize);
+  const ImageGatewayModel = imageGatewayModelDefiner.modelDefiner(sequelize);
+  const ImageModel = ImageModelDefiner.modelDefiner(sequelize);
 
   const sequelizeWithModels = sequelize as SequelizeWithModels;
   const sequelizeModelsMap = {
@@ -35,6 +42,7 @@ export const addModelDefiners = (sequelize: Sequelize): DatabaseMap => {
     ItemModel,
     SectionModel,
     ImageModel,
+    ImageGatewayModel,
   };
 
   addModelAssociations(sequelize);

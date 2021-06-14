@@ -1,12 +1,10 @@
-import { useMemo, useRef } from 'react';
-import clsx from 'clsx';
+import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Card } from '@src/components/Card/Card';
 import { commonStore } from '@src/store';
 
 import classnames from './index.module.scss';
-import { shouldBeGrownCheck } from '@src/utils/functions/markup';
 
 interface Category {
   id: number;
@@ -16,11 +14,6 @@ interface Category {
     image_urls: string[];
     description: string;
   }[];
-}
-
-interface GridCategory extends Category {
-  isFullWrap: boolean;
-  marginForCard?: number;
 }
 
 interface NamedGridViewProps {
@@ -34,45 +27,14 @@ const NamedGridView: React.FunctionComponent<NamedGridViewProps> = (props) => {
   const gridViewContainerRef = useRef<HTMLElement>(null);
   const windowSize = useSelector(commonStore.selectors.getWindowSize());
 
-  const categoriesGrid: GridCategory[] = useMemo(() => {
-    return categories.map((category) => {
-      const containerWidth = gridViewContainerRef?.current?.clientWidth;
-
-      if (!containerWidth || !windowSize) {
-        return {
-          ...category,
-          isFullWrap: false,
-        };
-      }
-
-      const cardSize = Card.Sizes[windowSize.size];
-      const { isFullWrap, marginForCard } = shouldBeGrownCheck(
-        containerWidth,
-        cardSize,
-        category.items.length,
-        Card.DefaultMargin,
-      );
-
-      return {
-        ...category,
-        isFullWrap,
-        marginForCard,
-      };
-    });
-  }, [categories, gridViewContainerRef, windowSize]);
-
   return (
     <section className={classnames.named_grid_wrapper} ref={gridViewContainerRef}>
       <h1>{title}</h1>
 
-      {categoriesGrid.map((category) => (
+      {categories.map((category) => (
         <article key={category.id}>
           <h3>{category.name}</h3>
-          <div
-            className={clsx(classnames.cards_wrapper, {
-              [classnames.fullWrap]: category.isFullWrap,
-            })}
-          >
+          <div className={classnames.cards_wrapper}>
             {category.items.map((item) => (
               <Card
                 key={item.name}
@@ -81,7 +43,7 @@ const NamedGridView: React.FunctionComponent<NamedGridViewProps> = (props) => {
                 images={item.image_urls}
                 redirectUrl={`/store/${item.name}`}
                 size={windowSize?.size || null}
-                marginRight={category.marginForCard}
+                marginRight={50}
               />
             ))}
           </div>

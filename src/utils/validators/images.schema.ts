@@ -10,9 +10,7 @@ export const imagesSchema: JSONSchemaType<ImageInterface[]> = {
       name: { type: 'string' },
       url: { type: 'string' },
 
-      CategoryId: { type: 'integer', nullable: true },
-      ItemId: { type: 'integer', nullable: true },
-      SectionId: { type: 'integer', nullable: true },
+      ImageGatewayId: { type: 'integer', nullable: false },
 
       createdAt: { type: 'string' },
       updatedAt: { type: 'string' },

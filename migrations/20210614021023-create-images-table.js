@@ -17,32 +17,14 @@ module.exports = {
         allowNull: false,
       },
 
-      CategoryId: {
+      ImageGatewayId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'categories',
+          model: 'image_gateway',
           key: 'id',
         },
         onDelete: 'CASCADE',
-        allowNull: true,
-      },
-      ItemId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'items',
-          key: 'id',
-        },
-        onDelete: 'CASCADE',
-        allowNull: true,
-      },
-      SectionId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'sections',
-          key: 'id',
-        },
-        onDelete: 'CASCADE',
-        allowNull: true,
+        allowNull: false,
       },
 
       createdAt: {

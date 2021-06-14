@@ -10,9 +10,21 @@ export const getSectionsService = async (
     include: [
       {
         model: db.CategoryModel,
-        include: [db.ImageModel],
+        include: [
+          {
+            model: db.ImageModel,
+            through: {
+              attributes: [],
+            },
+          },
+        ],
       },
-      db.ImageModel,
+      {
+        model: db.ImageModel,
+        through: {
+          attributes: [],
+        },
+      },
     ],
   });
 

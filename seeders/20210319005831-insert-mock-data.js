@@ -1,4 +1,7 @@
 'use strict';
+/**
+ * This file will be rewritten, just for test now
+ */
 
 const images = [
   {
@@ -171,18 +174,42 @@ const saveImage = async (
 ) => {
   const foundImages = images.filter((image) => ids.includes(image.id));
 
-  // const [existingImages] =
-  //   (await queryInterface.sequelize.query(
-  //     `SELECT * FROM images WHERE url IN (${foundImages.map(({ url }) => `'${url}'`).join(', ')})`,
-  //   )) || [];
+  let image_type = '';
+  if (CategoryId) {
+    image_type = 'category';
+  }
+  if (ItemId) {
+    image_type = 'item';
+  }
+  if (SectionId) {
+    image_type = 'section';
+  }
 
-  // const imagesToCreate = foundImages.filter(
-  //   (img) => !existingImages.some(({ url }) => img.url === url),
-  // );
+  const gatewayFields = {
+    reference_id: CategoryId || ItemId || SectionId,
+    image_type,
+  };
 
-  // const imagesToUpdate = existingImages.filter((img) =>
-  //   foundImages.some(({ url }) => img.url === url),
-  // );
+  let imageGatewayId = await queryInterface.rawSelect(
+    'image_gateway',
+    {
+      where: gatewayFields,
+    },
+    ['id'],
+  );
+
+  if (!imageGatewayId) {
+    await queryInterface.bulkInsert('image_gateway', [
+      { ...gatewayFields, createdAt: new Date(), updatedAt: new Date() },
+    ]);
+    imageGatewayId = await queryInterface.rawSelect(
+      'image_gateway',
+      {
+        where: gatewayFields,
+      },
+      ['id'],
+    );
+  }
 
   return Promise.all([
     foundImages.length
@@ -192,9 +219,7 @@ const saveImage = async (
             name: image.name,
             url: image.url,
 
-            CategoryId,
-            ItemId,
-            SectionId,
+            ImageGatewayId: imageGatewayId,
 
             createdAt: new Date(),
             updatedAt: new Date(),
