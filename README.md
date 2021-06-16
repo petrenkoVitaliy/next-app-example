@@ -4,8 +4,11 @@ TODOs & last commit changes:
 
 - add breadcrumbs
 - add FE containers & routes
+
   -- FAQ
+
   -- CONTACTS
+
   -- HOME
 
 - check 404 handling (images)
@@ -13,8 +16,11 @@ TODOs & last commit changes:
 
 // BE -------------------
 
-x- add preview_description to item
+x add preview_description to item
+
 x- add item content table
+
+- add eslint fail on error on pre commit
 
 - add blog schema - FE takes all records
 - add blog content FAQ schema
