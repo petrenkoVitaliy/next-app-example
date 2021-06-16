@@ -21,12 +21,11 @@ const sections: { id: number; name: string }[] = [
   },
 ];
 
-const addDates = (section: { id: number; name: string }): SectionAttributes => ({
-  ...section,
+const addDates = <T>(data: T): T & { createdAt: Date; updatedAt: Date } => ({
+  ...data,
   createdAt: new Date(),
   updatedAt: new Date(),
 });
-
 module.exports = {
   up: async (queryInterface: QueryInterface) => {
     await queryInterface.bulkInsert('sections', sections.map(addDates));

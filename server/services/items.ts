@@ -19,6 +19,9 @@ export const getItem = async (
           attributes: [],
         },
       },
+      {
+        model: db.ItemContentModel,
+      },
     ],
   });
 
@@ -42,6 +45,9 @@ export const getItemsByCategoryService = async (
             through: {
               attributes: [],
             },
+          },
+          {
+            model: db.ItemContentModel,
           },
         ],
       })

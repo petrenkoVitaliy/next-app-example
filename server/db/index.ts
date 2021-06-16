@@ -41,7 +41,7 @@ const formatDBLog = (message: string) => {
 
   //(key) => `(?=${key})`).join('|')
   const parsedMessage = message
-    .replace(/\`/g, '')
+    .replace(/`/g, '')
     .replace(/'/g, '"')
     .split(new RegExp(keyWords.map((key) => `(${key} )`).join('|')))
     .filter(Boolean)

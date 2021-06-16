@@ -1,26 +1,30 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
 import { ModelInstanceStatic, ModelInstanceType } from '@server/interfaces/model.interface';
+import { ItemContentType } from '@server/constants/item';
 
-export interface ItemTagAttributes {
+export interface ItemContentAttributes {
   id: number;
   ItemId: number;
 
   key: string;
   value: string;
+  content_type: ItemContentType;
 
   createdAt: string;
   updatedAt: string;
 }
 
-export type ItemTagModel = ModelInstanceType<ItemTagAttributes>;
+export type ItemContentModel = ModelInstanceType<ItemContentAttributes>;
+
+const contentTypes = [ItemContentType.single, ItemContentType.named];
 
 const modelDefiner = (sequelize: Sequelize) => {
-  return <ModelInstanceStatic<ItemTagModel>>sequelize.define<
+  return <ModelInstanceStatic<ItemContentModel>>sequelize.define<
     Model,
-    Omit<ItemTagAttributes, 'createdAt' | 'updatedAt'>
+    Omit<ItemContentAttributes, 'createdAt' | 'updatedAt'>
   >(
-    'ItemTagModel',
+    'ItemContentModel',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -34,26 +38,30 @@ const modelDefiner = (sequelize: Sequelize) => {
           key: 'id',
         },
       },
+      content_type: {
+        type: DataTypes.ENUM(...contentTypes),
+        allowNull: false,
+      },
       key: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       value: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
     },
     {
-      tableName: 'item_tags',
+      tableName: 'item_content',
       timestamps: true,
     },
   );
 };
 
 const modelAssociationsDefiner = (sequelize: Sequelize) => {
-  const { ItemTagModel, ItemModel } = sequelize.models;
+  const { ItemContentModel, ItemModel } = sequelize.models;
 
-  ItemTagModel.belongsTo(ItemModel, { foreignKey: 'ItemId' });
+  ItemContentModel.belongsTo(ItemModel, { foreignKey: 'ItemId' });
 };
 
 export default { modelAssociationsDefiner, modelDefiner };

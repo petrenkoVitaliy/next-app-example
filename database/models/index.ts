@@ -6,6 +6,7 @@ import sectionModelDefiner, { SectionModel } from './section';
 import imageGatewayModelDefiner, { ImageGatewayModel } from './image_gateway';
 import ImageModelDefiner, { ImageModel } from './image';
 import ItemTagModelDefiner, { ItemTagModel } from './item_tag';
+import ItemContentModelDefiner, { ItemContentModel } from './item_content';
 
 interface ModelsMap {
   CategoryModel: ModelInstanceStatic<CategoryModel>;
@@ -14,6 +15,7 @@ interface ModelsMap {
   ImageGatewayModel: ModelInstanceStatic<ImageGatewayModel>;
   ImageModel: ModelInstanceStatic<ImageModel>;
   ItemTagModel: ModelInstanceStatic<ItemTagModel>;
+  ItemContentModel: ModelInstanceStatic<ItemContentModel>;
 }
 
 type SequelizeWithModels = Sequelize & { models: ModelsMap };
@@ -29,6 +31,7 @@ const associationDefiners = [
   imageGatewayModelDefiner,
   ImageModelDefiner,
   ItemTagModelDefiner,
+  ItemContentModelDefiner,
 ].map(({ modelAssociationsDefiner }) => modelAssociationsDefiner);
 
 export const addModelDefiners = (sequelize: Sequelize): DatabaseMap => {
@@ -38,6 +41,7 @@ export const addModelDefiners = (sequelize: Sequelize): DatabaseMap => {
   const ImageGatewayModel = imageGatewayModelDefiner.modelDefiner(sequelize);
   const ImageModel = ImageModelDefiner.modelDefiner(sequelize);
   const ItemTagModel = ItemTagModelDefiner.modelDefiner(sequelize);
+  const ItemContentModel = ItemContentModelDefiner.modelDefiner(sequelize);
 
   const sequelizeWithModels = sequelize as SequelizeWithModels;
   const sequelizeModelsMap = {
@@ -48,6 +52,7 @@ export const addModelDefiners = (sequelize: Sequelize): DatabaseMap => {
     ImageModel,
     ItemTagModel,
     ImageGatewayModel,
+    ItemContentModel,
   };
 
   addModelAssociations(sequelize);

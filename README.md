@@ -2,6 +2,7 @@ TODOs & last commit changes:
 
 // FE -------------------
 
+- add breadcrumbs
 - add FE containers & routes
   -- FAQ
   -- CONTACTS
@@ -12,16 +13,11 @@ TODOs & last commit changes:
 
 // BE -------------------
 
-x- add item tags schema
-x- transfer models, seeds, migrations to external folder
-x- convert seeds & migrations to ts files
-x- change db logging format
-x- split seeds
-x- update taskfile
-x- add .sequelizerc
+x- add preview_description to item
+x- add item content table
 
-- add short description + additional descriptions (items) fields
-- add item FAQ schema
-- add content schema
-- add content FAQ schema
-- add flag column for images
+- add blog schema - FE takes all records
+- add blog content FAQ schema
+- add FAQ schema - FE takes all records
+
+- add flag column for images (enum needed)

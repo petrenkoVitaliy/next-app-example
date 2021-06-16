@@ -1,31 +1,34 @@
 import { DataTypes, QueryInterface } from 'sequelize/types';
 
+const ContentType = {
+  single: 'single',
+  named: 'named',
+};
+
 module.exports = {
   up: async (queryInterface: QueryInterface, Sequelize: typeof DataTypes) => {
-    await queryInterface.createTable('items', {
+    await queryInterface.createTable('item_content', {
       id: {
-        allowNull: false,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      description: {
+      key: {
         type: Sequelize.TEXT,
         allowNull: false,
       },
-      price: {
-        type: Sequelize.INTEGER,
+      value: {
+        type: Sequelize.TEXT,
         allowNull: false,
       },
-
-      CategoryId: {
+      content_type: {
+        type: Sequelize.ENUM(...Object.values(ContentType)),
+        allowNull: false,
+      },
+      ItemId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'categories',
+          model: 'items',
           key: 'id',
         },
         onDelete: 'CASCADE',
@@ -44,6 +47,6 @@ module.exports = {
   },
 
   down: async (queryInterface: QueryInterface) => {
-    await queryInterface.dropTable('items');
+    await queryInterface.dropTable('item_content');
   },
 };

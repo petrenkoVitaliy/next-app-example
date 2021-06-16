@@ -1,6 +1,7 @@
 import { JSONSchemaType } from 'ajv';
 import { ItemInterface } from '@src/interfaces/items.interface';
 import { imagesSchema } from './images.schema';
+import { itemContentsSchema } from './itemContent.schema';
 
 export const itemSchema: JSONSchemaType<ItemInterface | null> = {
   type: 'object',
@@ -8,11 +9,13 @@ export const itemSchema: JSONSchemaType<ItemInterface | null> = {
     id: { type: 'integer' },
     name: { type: 'string' },
     description: { type: 'string' },
+    preview_description: { type: 'string' },
     price: { type: 'integer' },
 
     CategoryId: { type: 'integer' },
 
     ImageModels: imagesSchema,
+    ItemContentModels: itemContentsSchema,
 
     createdAt: { type: 'string' },
     updatedAt: { type: 'string' },

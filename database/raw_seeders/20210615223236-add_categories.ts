@@ -83,13 +83,8 @@ const categoriesMap: {
   },
 ];
 
-const addDates = (category: {
-  id: number;
-  name: string;
-  description: string;
-  SectionId: number;
-}) => ({
-  ...category,
+const addDates = <T>(data: T): T & { createdAt: Date; updatedAt: Date } => ({
+  ...data,
   createdAt: new Date(),
   updatedAt: new Date(),
 });

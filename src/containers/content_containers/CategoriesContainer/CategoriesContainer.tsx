@@ -13,7 +13,7 @@ const CategoriesContainer: React.FunctionComponent = () => {
         id: item.id,
         name: item.name,
         image_urls: item.ImageModels.map((image) => image.url),
-        description: item.description,
+        description: item.preview_description,
       })),
     [storeItems],
   );

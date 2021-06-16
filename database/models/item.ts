@@ -9,6 +9,7 @@ export interface ItemAttributes {
   id: number;
   name: string;
   description: string;
+  preview_description: string;
   price: number;
   createdAt: string;
   updatedAt: string;
@@ -43,6 +44,10 @@ const modelDefiner = (sequelize: Sequelize) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
+      preview_description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
       price: {
         type: DataTypes.NUMBER,
         allowNull: false,
@@ -64,10 +69,18 @@ const modelDefiner = (sequelize: Sequelize) => {
 };
 
 const modelAssociationsDefiner = (sequelize: Sequelize) => {
-  const { ItemModel, CategoryModel, ImageGatewayModel, ImageModel, ItemTagModel } =
-    sequelize.models;
+  const {
+    ItemModel,
+    CategoryModel,
+    ImageGatewayModel,
+    ImageModel,
+    ItemTagModel,
+    ItemContentModel,
+  } = sequelize.models;
 
+  ItemModel.hasMany(ItemContentModel, { foreignKey: 'ItemId' });
   ItemModel.hasMany(ItemTagModel, { foreignKey: 'ItemId' });
+
   ItemModel.belongsTo(CategoryModel, { foreignKey: 'CategoryId' });
   ItemModel.belongsToMany(ImageModel, {
     through: {
