@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 import { config } from '@config/index';
 
-import { addModelDefiners, DatabaseMap } from 'models';
+import { addModelDefiners, DatabaseMap } from 'database/models';
 import { Logger } from '@server/utils/logger';
 
 let sequelize: DatabaseMap | undefined = undefined;
@@ -25,6 +25,31 @@ export const checkConnection = async (sequelize: Sequelize) => {
     });
 };
 
+const formatDBLog = (message: string) => {
+  const keyWords = [
+    'WHERE',
+    'SELECT',
+    'INNER JOIN',
+    'LEFT OUTER JOIN',
+    'FROM',
+    'OUTER JOIN',
+    'RIGHT JOIN',
+    'LEFT JOIN',
+    'RIGHT OUTER JOIN',
+    'AND',
+  ];
+
+  //(key) => `(?=${key})`).join('|')
+  const parsedMessage = message
+    .replace(/\`/g, '')
+    .replace(/'/g, '"')
+    .split(new RegExp(keyWords.map((key) => `(${key} )`).join('|')))
+    .filter(Boolean)
+    .slice(1);
+
+  Logger.status(parsedMessage);
+};
+
 const generateSequelizeConnection = (): DatabaseMap => {
   const sequelize = new Sequelize(
     config.database.database,
@@ -39,7 +64,7 @@ const generateSequelizeConnection = (): DatabaseMap => {
         acquire: 30000,
         idle: 10000,
       },
-      // logging: false,
+      logging: formatDBLog,
     },
   );
 

@@ -1,5 +1,6 @@
 const mysql = require('mysql2/promise');
 require('dotenv').config();
+const { runMigrations, runSeeds } = require('./sequelize');
 
 async function connectToDatabase() {
   try {
@@ -42,7 +43,15 @@ async function dropDatabase() {
   }
 }
 
+async function fullReload(options) {
+  await dropDatabase();
+  await initDatabase();
+  await runMigrations();
+  await runSeeds();
+}
+
 module.exports = {
   initDatabase,
   dropDatabase,
+  fullReload,
 };

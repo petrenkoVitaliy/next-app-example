@@ -1,4 +1,4 @@
-import { SectionAttributes } from 'models/section';
+import { SectionAttributes } from 'database/models/section';
 import { CategoryInterface } from './categories.interface';
 import { ImageInterface } from './images.interface';
 

@@ -40,11 +40,6 @@ const modelDefiner = (sequelize: Sequelize) => {
     {
       tableName: 'image_gateway',
       timestamps: true,
-      hooks: {
-        beforeFind: (...args: any) => {
-          console.log(args);
-        },
-      },
     },
   );
 };

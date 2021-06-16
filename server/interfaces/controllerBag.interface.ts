@@ -1,4 +1,4 @@
-import { DatabaseMap } from 'models';
+import { DatabaseMap } from 'database/models';
 
 export interface ControllerBag {
   db: DatabaseMap | undefined;

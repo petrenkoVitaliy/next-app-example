@@ -24,7 +24,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async () => {
 
     return { props: { initialReduxState: { sections: { sections, items: [], item: null } } } };
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return { props: {} };
   }
 };

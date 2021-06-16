@@ -1,5 +1,5 @@
 import { FilledControllerBag } from '@server/interfaces/controllerBag.interface';
-import { SectionModel } from 'models/section';
+import { SectionModel } from 'database/models/section';
 
 export const getSectionsService = async (
   controllerBag: FilledControllerBag,

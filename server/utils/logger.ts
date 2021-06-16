@@ -15,12 +15,12 @@ class LoggerModel {
     console.log(`${this.routePrefix}`, chalk.yellowBright(msg));
   }
 
-  event(msg: string) {
-    console.log(`${this.eventPrefix}`, chalk.blue(msg));
+  event(...msg: any) {
+    console.log(`${this.eventPrefix}`, chalk.blue(this.__getObjLog(msg)));
   }
 
-  status(msg?: string) {
-    console.log(`${this.statusPrefix}`, chalk.yellow(msg));
+  status(...msg: any) {
+    console.log(`${this.statusPrefix}`, chalk.yellow(this.__getObjLog(msg)));
   }
 
   log(...msg: any) {

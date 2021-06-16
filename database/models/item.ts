@@ -64,8 +64,10 @@ const modelDefiner = (sequelize: Sequelize) => {
 };
 
 const modelAssociationsDefiner = (sequelize: Sequelize) => {
-  const { ItemModel, CategoryModel, ImageGatewayModel, ImageModel } = sequelize.models;
+  const { ItemModel, CategoryModel, ImageGatewayModel, ImageModel, ItemTagModel } =
+    sequelize.models;
 
+  ItemModel.hasMany(ItemTagModel, { foreignKey: 'ItemId' });
   ItemModel.belongsTo(CategoryModel, { foreignKey: 'CategoryId' });
   ItemModel.belongsToMany(ImageModel, {
     through: {

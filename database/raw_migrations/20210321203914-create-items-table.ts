@@ -1,8 +1,8 @@
-'use strict';
+import { DataTypes, QueryInterface } from 'sequelize/types';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('categories', {
+  up: async (queryInterface: QueryInterface, Sequelize: typeof DataTypes) => {
+    await queryInterface.createTable('items', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,11 +17,15 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false,
       },
+      price: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
 
-      SectionId: {
+      CategoryId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'sections',
+          model: 'categories',
           key: 'id',
         },
         onDelete: 'CASCADE',
@@ -39,7 +43,7 @@ module.exports = {
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('categories');
+  down: async (queryInterface: QueryInterface) => {
+    await queryInterface.dropTable('items');
   },
 };

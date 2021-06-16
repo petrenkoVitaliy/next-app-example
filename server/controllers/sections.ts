@@ -1,4 +1,4 @@
-import { SectionModel } from 'models/section';
+import { SectionModel } from 'database/models/section';
 
 import { withDatabase } from '@server/middlewares/withDatabase';
 import { withRequestLog } from '@server/middlewares/withRequestLog';

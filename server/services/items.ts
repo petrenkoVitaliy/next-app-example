@@ -1,5 +1,6 @@
 import { FilledControllerBag } from '@server/interfaces/controllerBag.interface';
-import { ItemModel } from 'models/item';
+import { Logger } from '@server/utils/logger';
+import { ItemModel } from 'database/models/item';
 
 export const getItem = async (
   controllerBag: FilledControllerBag,
@@ -53,7 +54,14 @@ export const getAllItems = async (controllerBag: FilledControllerBag): Promise<I
   const { db } = controllerBag;
 
   const items = await db.ItemModel.findAll({
-    include: db.ImageModel,
+    include: [
+      {
+        model: db.ImageModel,
+        through: {
+          attributes: [],
+        },
+      },
+    ],
   });
   return items;
 };

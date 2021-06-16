@@ -1,5 +1,5 @@
 import { FilledControllerBag } from '@server/interfaces/controllerBag.interface';
-import { CategoryModel } from 'models/category';
+import { CategoryModel } from 'database/models/category';
 
 export const getCategoriesService = async (
   controllerBag: FilledControllerBag,

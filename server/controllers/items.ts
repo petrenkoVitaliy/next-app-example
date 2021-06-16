@@ -3,7 +3,7 @@ import { withRequestLog } from '@server/middlewares/withRequestLog';
 import { getItemsByCategoryService, getAllItems, getItem } from '@server/services/items';
 import { Logger } from '@server/utils/logger';
 import { generateProvider } from '@server/utils/provider';
-import { ItemModel } from 'models/item';
+import { ItemModel } from 'database/models/item';
 import { NextApiRequest } from 'next';
 
 export const getItemsByCategoryProvider = generateProvider<ItemModel[], { categoryName: string }>(

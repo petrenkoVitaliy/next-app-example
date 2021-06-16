@@ -1,4 +1,4 @@
-'use strict';
+import { DataTypes, QueryInterface } from 'sequelize/types';
 
 const ImageType = {
   category: 'category',
@@ -7,7 +7,7 @@ const ImageType = {
 };
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface: QueryInterface, Sequelize: typeof DataTypes) => {
     await queryInterface.createTable('image_gateway', {
       id: {
         type: Sequelize.INTEGER,
@@ -34,7 +34,7 @@ module.exports = {
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface: QueryInterface) => {
     await queryInterface.dropTable('image_gateway');
   },
 };

@@ -1,9 +1,15 @@
 const { sh, cli, help } = require('tasksfile');
 const dedent = require('dedent');
 
-const { initDatabase, dropDatabase } = require('./scripts/database');
+const { initDatabase, dropDatabase, fullReload } = require('./scripts/database');
 const { uploadFile } = require('./scripts/cloud');
-const { createMigration, runMigrations, createSeed, runSeeds } = require('./scripts/sequelize');
+const {
+  createMigration,
+  runMigrations,
+  createSeed,
+  runSeeds,
+  buildSeeds,
+} = require('./scripts/sequelize');
 
 /**
  * use in terminal:
@@ -30,26 +36,37 @@ const format = {
 };
 
 const db = {
-  init() {
-    initDatabase();
+  schema: {
+    init() {
+      initDatabase();
+    },
+    drop() {
+      dropDatabase();
+    },
+    reload() {
+      fullReload();
+    },
   },
-  drop() {
-    dropDatabase();
-  },
-};
 
-const sequelize = {
-  migration(...args) {
-    createMigration(...args);
+  migration: {
+    add(...args) {
+      createMigration(...args);
+    },
+    run() {
+      runMigrations();
+    },
   },
-  seed(...args) {
-    createSeed(...args);
-  },
-  run_migrations() {
-    runMigrations();
-  },
-  run_seeds() {
-    runSeeds();
+
+  seed: {
+    add(...args) {
+      createSeed(...args);
+    },
+    run() {
+      runSeeds();
+    },
+    build() {
+      buildSeeds();
+    },
   },
 };
 
@@ -62,6 +79,5 @@ const cloud = {
 cli({
   format,
   db,
-  sequelize,
   cloud,
 });

@@ -1,26 +1,31 @@
-'use strict';
+import { DataTypes, QueryInterface } from 'sequelize/types';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('images', {
+  up: async (queryInterface: QueryInterface, Sequelize: typeof DataTypes) => {
+    await queryInterface.createTable('items', {
       id: {
-        type: Sequelize.INTEGER,
+        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.INTEGER,
       },
       name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      url: {
-        type: Sequelize.STRING,
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      price: {
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
 
-      ImageGatewayId: {
+      CategoryId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'image_gateway',
+          model: 'categories',
           key: 'id',
         },
         onDelete: 'CASCADE',
@@ -38,7 +43,7 @@ module.exports = {
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('images');
+  down: async (queryInterface: QueryInterface) => {
+    await queryInterface.dropTable('items');
   },
 };

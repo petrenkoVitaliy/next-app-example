@@ -1,4 +1,4 @@
-import { CategoryModel } from 'models/category';
+import { CategoryModel } from 'database/models/category';
 
 import { withDatabase } from '@server/middlewares/withDatabase';
 import { withRequestLog } from '@server/middlewares/withRequestLog';
