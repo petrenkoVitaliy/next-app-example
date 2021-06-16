@@ -15,7 +15,7 @@ export const Footer: React.FunctionComponent<FooterProps> = (props) => {
         <div className={classnames.footer_logo}>
           <h3>Logo</h3>
 
-          <Image src="/assets/images/logo_tmp.webp" height={100} width={100} />
+          <Image src="/assets/images/logo_tmp.png" height={100} width={100} />
           <p>This is footer</p>
         </div>
 
@@ -34,7 +34,7 @@ export const Footer: React.FunctionComponent<FooterProps> = (props) => {
         <div className={classnames.footer_contacts}>
           <h3>Contacts</h3>
 
-          <p>0987665457</p>
+          <p>12312312312</p>
           <p>contact1@gmail.com</p>
           <p>contact1.contact1</p>
         </div>
