@@ -17,6 +17,17 @@ const ItemContainer: React.FunctionComponent = () => {
             price: storeItem.price,
             CategoryId: storeItem.CategoryId,
             image_urls: storeItem.ImageModels.map((image) => image.url),
+            tags: storeItem.ItemTagModels.map((tag) => ({
+              id: tag.id,
+              key: tag.key,
+              value: tag.value,
+            })),
+            contentItems: storeItem.ItemContentModels.map((tag) => ({
+              id: tag.id,
+              key: tag.key,
+              value: tag.value,
+              content_type: tag.content_type,
+            })),
           }
         : null,
     [storeItem],

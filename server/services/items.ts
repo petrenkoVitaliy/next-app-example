@@ -22,6 +22,9 @@ export const getItem = async (
       {
         model: db.ItemContentModel,
       },
+      {
+        model: db.ItemTagModel,
+      },
     ],
   });
 

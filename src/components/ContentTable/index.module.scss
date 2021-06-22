@@ -1,0 +1,59 @@
+@import '../../styles/variables.scss';
+
+.contents_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+
+  .content_items_wrapper {
+    padding: 20px 40px;
+    width: 100%;
+
+    .content_item {
+      .content_item_title {
+        &.toggle {
+          position: relative;
+
+          padding: 10px;
+          margin: 10px 0;
+
+          background: $color-primary-3;
+          box-shadow: 0px 0px 3px 0px $color-primary;
+          cursor: pointer;
+          border-radius: 5px;
+
+          &.opened {
+            background: $color-primary-4;
+
+            .icon {
+              transform: rotate(180deg);
+            }
+          }
+
+          .icon {
+            position: absolute;
+            right: 10px;
+            top: calc(50% - 10px);
+            width: 20px;
+            height: 20px;
+
+            background-size: 20px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url('/assets/icons/collapse_arrow.svg');
+          }
+        }
+
+        font-size: $font-medium-1;
+        font-weight: bold;
+        padding: 10px 0;
+      }
+
+      .content_item_value {
+        font-size: $font-small-1;
+      }
+    }
+  }
+}

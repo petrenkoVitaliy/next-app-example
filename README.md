@@ -2,6 +2,10 @@ TODOs & last commit changes:
 
 // FE -------------------
 
+x add contents component
+
+x add tags component
+
 - add breadcrumbs
 - add FE containers & routes
 
@@ -15,10 +19,6 @@ TODOs & last commit changes:
 - check scss variables (margins)
 
 // BE -------------------
-
-x add preview_description to item
-
-x- add item content table
 
 - add eslint fail on error on pre commit
 

@@ -1,0 +1,28 @@
+@import '../../styles/variables.scss';
+
+.tags_wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+
+  .tags_block {
+    margin: 0 10px;
+
+    .tags_item {
+      padding: 5px;
+      width: fit-content;
+
+      display: flex;
+      justify-content: space-between;
+
+      .tags_item_key {
+        margin-right: 10px;
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+
+      .tags_item_value {
+      }
+    }
+  }
+}
